@@ -151,9 +151,8 @@ if (githubBtn) {
 
   });
 }
-// ==========================================
+
 // PHASE 7: WATCH AUTH STATE & LOGOUT
-// ==========================================
 
 // 1. Find the navbar items
 const loginNavItem = document.getElementById("login-nav-item");
