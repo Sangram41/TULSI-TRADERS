@@ -11,13 +11,28 @@
     <!-- Navbar -->
     <div class="navbar">
         <div class="container flex">
-            <h1 class="logo">TULSI TRADERS</h1>
+            <a href="TULSI1.html" >
+        <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
+    </a>
             <nav>
                 <ul>
                     <li><a href="home.html">SHOP</a></li>
                     <li><a href="features.html">CONTACT US</a></li>
                     <li><a href="docs.html">OUR STORY</a></li>
-                    <li><li><a href="login.html" class="nav-btn"><i class="nav-btn"></i> LOGIN</a></li></li>
+                    <li><a href="shopping.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
+                  
+                    <!-- Check that id="login-nav-item" is right here inside the <li> tag -->
+                    <li id="login-nav-item">
+                    <a href="login.html" class="nav-btn">
+                    <i class="fa-solid fa-circle-user"></i> LOGIN</a>
+                    <!-- Check that id="logout-nav-item" is right here inside this <li> tag -->
+                    <li id="logout-nav-item" style="display: none;">
+                    <a href="#" id="logout-btn" class="nav-btn">
+                    <i class="fa-solid fa-circle-user"></i> <span id="user-email-display">EMAIL</span> | LOGOUT
+                </a>
+</li>
+</li>
+</li>
                 </ul>
             </nav>
         </div>
@@ -34,5 +49,6 @@
             <!-- You can add an image or a secondary element for the right side of the grid here -->
         </div>
     </section>
+    <script type="module" src="auth.js"></script>
 </body>
 </html>
