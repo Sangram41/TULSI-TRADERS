@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+#menu-icon {
+    display: none; 
+}
+
 :root {
     --primary-color: #09310f32;
 }
@@ -535,8 +539,12 @@ a {
         font-size: 16px;
         display: block;
     }
-
-/* Hide the hamburger icon on laptops */
-#menu-icon {
-    display: none;
+    #menu-icon {
+        display: block; /* This brings it back on mobile! */
+        position: absolute; 
+        left: 15px; 
+        font-size: 24px;
+        color: #0B5C46;
+        cursor: pointer;
+    }
 }
