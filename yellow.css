@@ -469,60 +469,67 @@ a {
 /* =========================================
        MOBILE NAVBAR & SLIDE-OUT MENU
     ========================================= */
+  /* =========================================
+       MOBILE NAVBAR & SLIDE-OUT MENU
+    ========================================= */
     
-    /* 1. Fix the Navbar Height & Padding */
+    /* Fix the Navbar Height & Padding */
     .navbar {
-        height: 60px; /* Makes the navbar much thinner */
+        height: 60px;
         padding: 0 15px; 
     }
     
+    /* Center everything in the navbar */
     .navbar .flex {
-        flex-direction: row; /* Keeps logo and icon side-by-side */
-        justify-content: space-between;
+        position: relative; /* This is the anchor for the absolute icon! */
+        flex-direction: row; 
+        justify-content: center; /* Pushes the logo perfectly to the center */
         align-items: center;
         height: 100%;
     }
 
-    /* 2. Force the Logo onto ONE line */
+    /* Increase font size and keep it on one line */
     .logo {
-        font-size: 20px !important; /* Shrink font size */
-        white-space: nowrap; /* This magic rule prevents word-wrapping! */
+        font-size: 24px !important; /* INCREASED from 20px */
+        white-space: nowrap; 
         padding: 0 !important;
         margin: 0;
     }
 
-    /* 3. Show the Hamburger Icon */
+    /* Pin the icon to the left wall */
     #menu-icon {
         display: block;
+        position: absolute; 
+        left: 15px; /* Pins it 15px from the left edge */
         font-size: 24px;
         color: #0B5C46;
         cursor: pointer;
     }
 
-    /* 4. Turn the links into a hidden Left Sidebar */
+    /* Turn the links into a hidden Left Sidebar */
     .navbar ul {
         position: fixed;
         top: 0;
-        left: -100%; /* Hides the menu completely off the left side of the screen */
+        left: -100%; /* Hides the menu completely */
         width: 250px;
-        height: 100vh; /* Full screen height */
+        height: 100vh; 
         background-color: #f1f8f5;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
         padding-left: 30px;
-        transition: 0.4s ease; /* Creates the smooth sliding animation */
+        transition: 0.4s ease; 
         box-shadow: 5px 0 15px rgba(0,0,0,0.2);
         z-index: 1000;
         margin: 0;
     }
 
-    /* 5. The "Active" state that JavaScript will trigger */
+    /* The "Active" state that JavaScript will trigger */
     .navbar ul.active {
         left: 0; /* Slides the menu onto the screen! */
     }
 
-    /* 6. Fix the massive link padding */
+    /* Fix the massive link padding */
     .navbar a {
         padding: 15px 0 !important; 
         font-size: 16px;
