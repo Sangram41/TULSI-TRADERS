@@ -450,22 +450,50 @@ a {
 .social-btn i {
     font-size: 16px;
 }
-/* --- Mobile Responsive Rule --- */
 @media (max-width: 768px) {
+    
+    /* --- (Keep your existing split-screen rules here) --- */
     .split-screen {
         flex-direction: column; 
-        height: auto; /* Let the page stretch as tall as it needs to */
+        height: auto; 
     }
-    
-    .left-pane {
-        flex: none; /* Stop trying to be exactly half the height */
-        min-height: 250px; /* Give the background image a nice fixed height on phones */
+  .left-pane {
+        display: none; /* This makes the entire image side vanish on phones! */
+    }
+.right-pane {
+        flex: none; 
         width: 100%;
+        min-height: 100vh; /* Forces the form to take up the full height of the phone */
+        padding: 30px 20px; 
+    }
+    /* =========================================
+       NEW: TULSI1.HTML HOME PAGE FIXES
+    ========================================= */
+    
+    /* 1. Force the grid to become a single column */
+    .grid, .showcase .grid {
+        grid-template-columns: 1fr; /* This is the magic grid-stacking rule! */
+        text-align: center;
     }
 
-    .right-pane {
-        flex: none; /* Stop trying to be exactly half the height */
-        width: 100%;
-        padding: 30px 0; /* Add some breathing room above and below the form */
+    /* 2. Fix the Navigation Bar overflow */
+    .navbar {
+        height: auto; /* Let the navbar expand if needed */
+        padding: 15px 0;
+    }
+    
+    .navbar .flex {
+        flex-direction: column; /* Stack the logo and the links */
+        gap: 15px;
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .navbar a {
+        padding: 8px 12px; /* This overrides the massive 69px padding on mobile */
     }
 }
