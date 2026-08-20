@@ -192,3 +192,16 @@ if (logoutBtn) {
     });
   });
 }
+
+// ==========================================
+// MOBILE MENU TOGGLE
+// ==========================================
+const menuIcon = document.getElementById("menu-icon");
+const navMenu = document.querySelector(".navbar ul");
+
+if (menuIcon && navMenu) {
+  menuIcon.addEventListener("click", function() {
+    // This adds or removes the "active" class to trigger the CSS slide animation
+    navMenu.classList.toggle("active");
+  });
+}
