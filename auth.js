@@ -205,3 +205,71 @@ if (menuIcon && navMenu) {
     navMenu.classList.toggle("active");
   });
 }
+
+// ==========================================
+// SCROLL REVEAL — PHILOSOPHY SECTION
+// ==========================================
+const revealTargets = document.querySelectorAll(".philosophy-image, .philosophy-text");
+
+if (revealTargets.length) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  revealTargets.forEach(el => observer.observe(el));
+}
+
+// ==========================================
+// STAT COUNTER (Philosophy section)
+// ==========================================
+const statNumbers = document.querySelectorAll(".stat h3");
+
+if (statNumbers.length) {
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const finalText = el.textContent.trim(); // e.g. "100%" or "Zero"
+        const numMatch = finalText.match(/\d+/);
+
+        if (numMatch) {
+          const target = parseInt(numMatch[0]);
+          const suffix = finalText.replace(numMatch[0], "");
+          let current = 0;
+          const step = Math.ceil(target / 40);
+
+          const tick = () => {
+            current += step;
+            if (current >= target) {
+              el.textContent = target + suffix;
+            } else {
+              el.textContent = current + suffix;
+              requestAnimationFrame(tick);
+            }
+          };
+          tick();
+        }
+        statObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(el => statObserver.observe(el));
+}
+
+// ==========================================
+// SHRINK NAVBAR ON SCROLL
+// ==========================================
+const navbarEl = document.querySelector(".navbar");
+
+if (navbarEl) {
+  window.addEventListener("scroll", () => {
+    navbarEl.classList.toggle("scrolled", window.scrollY > 50);
+  });
+}
+

@@ -58,6 +58,16 @@ a {
     background-color: var(--primary-color);
     color: #333;
     height: 80px;
+
+    transition: height 0.3s ease, box-shadow 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar.scrolled {
+    height: 60px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
 }
 
 .navbar .flex {
@@ -69,18 +79,35 @@ a {
     align-items: center; 
     gap: 20px;
 }
-
 .navbar a {
-    color: rgb(2, 8, 7);
+     color: rgb(2, 8, 7);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 14px;
+    padding: 69px; color: rgb(2, 8, 7);
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: 14px;
     padding: 69px;
-    margin: 0 0px;
+      margin: 0 0px;
+    position: relative;
+    /* ...keep existing properties... */
 }
 
-.navbar a:hover {
-    border-bottom: 2px solid transparent;
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #0B5C46;
+    transition: 0.3s ease;
+    transform: translateX(-50%);
 }
+
+.navbar a:hover::after {
+    width: 60%;
+}
+
 
 /* Showcase */
 .showcase {
@@ -131,7 +158,7 @@ a {
     color: #0B5C46;
     padding: 8px 16px;
     border-radius: 50px;
-    font-size: 11px;
+    font-size: 25px;
     font-weight: bold;
     letter-spacing: 1px;
     margin-bottom: 20px;
@@ -142,6 +169,7 @@ a {
 .showcase-text {
     margin-top: 200px; 
     margin-left: 60px; 
+    animation: fadeSlideUp 0.8s ease-out both;
 }
 
 .showcase-text h2 {
@@ -184,9 +212,9 @@ a {
     color: #ffffff;
     border: 2px solid #0B5C46;
 }
-
-.btn-solid:hover {
-    background-color: #084232;
+.btn-solid:hover, .btn-outline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(11, 92, 70, 0.25);
 }
 
 .btn-outline {
@@ -673,8 +701,8 @@ a {
 /* Image & Floating Card */
 .philosophy-image {
     position: relative; 
-    max-height: 50%;
-    max-width: 60%; 
+    max-height: 70%;
+    max-width: 55%; 
 }
 
 .philosophy-image img {
@@ -684,18 +712,35 @@ a {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
+
 .philosophy-text{
     padding-right: 100px;
 }
+.philosophy-image, .philosophy-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.philosophy-image.in-view, .philosophy-text.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
 .floating-card {
     position: absolute;
-    bottom: -230px;
+    bottom: -70px;
     right: -440px;
     background: #f4f7fb;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     max-width: 250px;
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
 .floating-card i { color: #588b68; font-size: 24px; margin-bottom: 10px; }
@@ -842,6 +887,22 @@ a {
         font-size: 16px;
         display: block;
     }
+    .navbar ul li {
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar ul.active li:nth-child(1) { transition-delay: 0.1s; }
+.navbar ul.active li:nth-child(2) { transition-delay: 0.15s; }
+.navbar ul.active li:nth-child(3) { transition-delay: 0.2s; }
+.navbar ul.active li:nth-child(4) { transition-delay: 0.25s; }
+.navbar ul.active li:nth-child(5) { transition-delay: 0.3s; }
+
+.navbar ul.active li {
+    opacity: 1;
+    transform: translateX(0);
+}
 
     /* === PRODUCT PREVIEW FIX === */
     .preview-header {
