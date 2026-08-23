@@ -868,9 +868,10 @@ a {
         gap: 40px !important; 
         box-sizing: border-box !important;
     }
-    .philosophy-image {
+.philosophy-image {
         width: 100% !important; 
         max-width: 100% !important;
+        height: auto !important; /* Forces the invisible wrapper to wrap around the image! */
         margin: 0 !important;
         display: block !important;
     }
