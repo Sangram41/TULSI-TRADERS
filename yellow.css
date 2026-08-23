@@ -868,13 +868,26 @@ a {
         gap: 40px !important; 
         box-sizing: border-box !important;
     }
-.philosophy-image {
+/* The Wrapper (you already have this) */
+    .philosophy-image {
         width: 100% !important; 
         max-width: 100% !important;
-        height: auto !important; /* Forces the invisible wrapper to wrap around the image! */
+        height: auto !important; 
         margin: 0 !important;
         display: block !important;
     }
+
+    /* === ADD THIS NEW RULE FOR THE ACTUAL PICTURE === */
+    .philosophy-image img {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1 !important;
+     }
     .philosophy-text {
         width: 100% !important; 
         max-width: 100% !important;
