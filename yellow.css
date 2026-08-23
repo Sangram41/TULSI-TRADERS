@@ -748,29 +748,26 @@ a {
 
 @media (max-width: 768px) {
    
+    /* === SPLIT SCREEN (LOGIN PAGE) === */
     .split-screen {
         flex-direction: column; 
         height: auto; 
     }
-  .left-pane {
+    .left-pane {
         display: none;
     }
-.right-pane {
+    .right-pane {
         flex: none; 
         width: 100%;
         min-height: 100vh;
         padding: 30px 20px; 
     }
-/*
-       MOBILE NAVBAR & SLIDE-OUT MENU
-    
-    /* Fix the Navbar Height & Padding */
+
+    /* === MOBILE NAVBAR === */
     .navbar {
         height: 60px;
         padding: 0 15px; 
     }
-    
-    /* Center everything in the navbar */
     .navbar .flex {
         position: relative;
         flex-direction: row; 
@@ -778,16 +775,12 @@ a {
         align-items: center;
         height: 100%;
     }
-
-    /* Increase font size and keep it on one line */
     .logo {
         font-size: 24px !important; 
         white-space: nowrap; 
         padding: 0 !important;
         margin: 0;
     }
-
-    /* Pin the icon to the left wall */
     #menu-icon {
         display: block;
         position: absolute; 
@@ -796,15 +789,14 @@ a {
         color: #0B5C46;
         cursor: pointer;
     }
-
-    /* Turn the links into a hidden Left Sidebar */
     .navbar ul {
         position: fixed;
         top: 0;
-        left: -100%; /* Hides the menu completely */
+        left: -100%; 
         width: 250px;
         height: 100vh; 
         background-color: #f1f8f5;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
@@ -814,66 +806,54 @@ a {
         z-index: 1000;
         margin: 0;
     }
-
-    /* The "Active" state that JavaScript will trigger */
     .navbar ul.active {
         left: 0;
     }
-
-    /* Fix the massive link padding */
     .navbar a {
         padding: 15px 0 !important; 
         font-size: 16px;
         display: block;
     }
-    #menu-icon {
-        display: block; 
-        position: absolute; 
-        left: 15px; 
-        font-size: 24px;
-        color: #0B5C46;
-        cursor: pointer;
-    }
-    /* Mobile Fix for Product Preview */
+
+    /* === PRODUCT PREVIEW FIX === */
     .preview-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
-    
     .preview-grid {
-        grid-template-columns: 1fr; /* Stacks the cards on mobile! */
+        display: grid;
+        grid-template-columns: 1fr; /* Stacks the cards */
     }
-    /* Mobile Fixes for Philosophy & Footer */
+
+    /* === PHILOSOPHY SECTION FIX === */
     .grid-2-col {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        display: flex;
+        flex-direction: column; /* Stacks image on top of text */
+        gap: 50px; 
+        padding: 0 20px;
     }
-    
+    .philosophy-image {
+        width: 90%; /* Leaves a nice border on small screens */
+        margin: 0 auto; 
+    }
+    .philosophy-text {
+        width: 100%; /* Resets the 50/50 desktop split so text takes full width */
+    }
     .floating-card {
-        bottom: -10px;
-        right: 10px;
+        bottom: -15px;
+        left: -15px; /* Keeps it locked to bottom-left corner */
         max-width: 200px;
+        padding: 15px;
     }
-    
+
+    /* === FOOTER FIX === */
     .footer-layout {
         flex-direction: column;
         align-items: flex-start;
         gap: 30px;
     }
-    
     .footer-links {
         flex-wrap: wrap;
-    }
-    /* Shrink the image on mobile screens */
-    .philosophy-image {
-        max-width: 85%; /* Leaves a nice border of space on small phone screens */
-        margin: 0 auto; 
-    }
-    /* Mobile Fixes for Philosophy */
-    .grid-2-col {
-        grid-template-columns: 1fr;
-        gap: 50px; /* Shrinks the giant 120px gap back down for phones */
-        padding: 0 20px;
     }
 }
