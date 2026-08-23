@@ -32,7 +32,7 @@ h2 {
     font-family: serif;
     line-height: 1.2;
     margin: 10px 0;
-    color:#0B5C46;
+    color:#56e216;
 }
 
 p {
@@ -97,11 +97,11 @@ a {
 
 .showcase h1 {
     font-size: 40px;
-      color: #0B5C46;
+      color: #8ff216;
 }
 
 .showcase a{
-      color: #0B5C46;
+      color: #a4e713;
       font-size: 20px;
       font-weight : bold;
       border-color: #0B5C46;
@@ -121,9 +121,88 @@ a {
     gap: 30px;
 }
 
+
+/* --- Showcase Typography & Badge --- */
+
+
+.badge {
+    display: inline-block;
+    background: #ffffff;
+    color: #0B5C46;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    
+}
+
+.showcase-text {
+    margin-top: 200px; 
+    margin-left: 60px; 
+}
+
+.showcase-text h2 {
+    font-size: 55px; 
+    font-family: serif;
+    color: #ffffff; /* Changed to bright white */
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* Adds a dark glow behind the text */
+}
+
+.showcase-text h2 em {
+    font-style: italic;
+}
+.showcase-text p {
+    color: #f1f8f5; /* Changed to a very light mint-white */
+    font-size: 30px;
+    max-width: 500px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+}
+
+/* --- Showcase Buttons --- */
+.button-group {
+    display: flex;
+    gap: 15px; /* Spaces the buttons perfectly */
+}
+
+.btn-solid, .btn-outline {
+    padding: 12px 24px;
+    border-radius: 6px; /* Slightly rounded squares, like the image */
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+    text-align: center;
+}
+.btn-solid {
+    background-color: #0B5C46;
+    color: #ffffff;
+    border: 2px solid #0B5C46;
+}
+
+.btn-solid:hover {
+    background-color: #084232;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #0B5C46;
+    border: 2px solid #0B5C46;
+}
+
+.btn-outline:hover {
+    background-color: rgba(11, 92, 70, 0.1);
+}
+
+
 /* Forms */
 .showcase-form .logo{
-    color: #0B5C46;
+    color: #2e5c0b;
     font-family: serif;
     font-size: 40px;
     padding:20px;
@@ -132,7 +211,7 @@ a {
     position: relative;
     height: auto;
     width: 400px;
-    padding: 40px#0B5C46;
+    padding: 40px;
     z-index: 100;
     margin: 40px auto;
 }
@@ -154,16 +233,6 @@ a {
 
 .showcase-form input:focus {
     outline: none;
-}
-
-.showcase::before,.showcase::after {
-    content: 'HELLOs';
-    position: absolute;
-    right: 0;
-    left: 0;
-    bottom :-70px;
-    height: 100px;
-    background-color: red;
 }
 
 
@@ -238,9 +307,9 @@ a {
 
 
 
-/* =========================================
+/* 
    SPLIT-SCREEN LOGIN PAGE STYLES
-========================================= */
+*/
 .login-body {
     margin: 0;
 }
@@ -253,7 +322,7 @@ a {
 /* --- Left Pane (Image) --- */
 .left-pane {
     flex: 1; 
-    background-image: url('https://cdn.pixabay.com/photo/2024/09/20/14/25/ai-generated-9061583_1280.png'); 
+    background-image: url('https://cdn.pixabay.com/photo/2024/09/20/01/37/spice-market-9060102_1280.jpg'); 
     background-size: cover;
     background-position: center;
     display: flex;
@@ -311,7 +380,7 @@ a {
     font-weight: bold;
     color: #888;
     cursor: pointer;
-    text-decoration: none; /* Add this line to hide the link underline! */
+    text-decoration: none; 
 }
 
 .tab.active {
@@ -322,6 +391,7 @@ a {
 
 
 /* --- Form Headers & Labels --- */
+
 .form-header {
     text-align: center;
     margin-bottom: 30px;
@@ -379,7 +449,7 @@ a {
 
 .input-icon-wrapper input {
     width: 100%;
-    padding: 12px 15px 12px 40px; /* Left padding makes room for the icon */
+    padding: 12px 15px 12px 40px; 
     border: 1px solid #D1D5DB;
     border-radius: 6px;
     font-size: 14px;
@@ -454,28 +524,245 @@ a {
 .social-btn i {
     font-size: 16px;
 }
+
+/* === PRODUCT PREVIEW SECTION === */
+.product-preview {
+    background-color: #cae4c5 ;
+    padding : 350px 0px 350px; 
+}
+
+.preview-header {
+    display: oot]lex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.preview-header h2 {
+    font-family: serif;
+    font-size: 36px;
+    color: #0B5C46;
+    margin-bottom: 10px;
+}
+
+.preview-header p {
+    color: #555;
+    max-width: 500px;
+}
+
+.view-all {
+    color: #4a7c59;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* --- The Grid --- */
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Equal Columns */
+    gap: 30px;
+}
+
+/* --- The Cards --- */
+.product-card {
+    height: 500%;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none; /* Removes the ugly blue link underline */
+    color: inherit;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-30px); 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.card-image {
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tags on the images */
+.badge-organic, .badge-local, .badge-signature {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1a4028;
+}
+.badge-organic { background-color: #bbf067; }
+.badge-local { background-color: #f0ec67; }
+.badge-signature { background-color: #0B5C46; color: white; }
+
+.card-content {
+    padding: 25px;
+    flex-grow: 1; /* Pushes the footer to the bottom */
+}
+
+.card-content h3 {
+    color: #0B5C46;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Footer (Price & Stock) */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0B5C46;
+}
+
+.price .unit {
+    font-size: 14px;
+    color: #888;
+    font-weight: normal;
+}
+
+.stock {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.in-stock { color: #4a7c59; }
+.low-stock { color: #d9534f; }
+
+/* === PHILOSOPHY SECTION === */
+.philosophy {
+    background-color:#cae4c5;
+    padding-right: 215px;
+    padding-bottom: 315px;
+    max-width: 100%;
+}
+
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Image & Floating Card */
+.philosophy-image {
+    position: relative; 
+    max-height: 50%;
+    max-width: 60%; 
+}
+
+.philosophy-image img {
+    margin-left: 400px;
+    margin-bottom: 100px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.philosophy-text{
+    padding-right: 100px;
+}
+.floating-card {
+    position: absolute;
+    bottom: -230px;
+    right: -440px;
+    background: #f4f7fb;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    max-width: 250px;
+}
+
+.floating-card i { color: #588b68; font-size: 24px; margin-bottom: 10px; }
+.floating-card h4 { color: #0B5C46; margin-bottom: 5px; }
+.floating-card p { font-size: 13px; color: #555; }
+
+/* Text Side */
+.overline {
+    color: #6a9c78;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.philosophy-text h2 {
+    font-family: serif;
+    font-size: 42px;
+    color: #0B5C46;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.philosophy-text p { color: #555; margin-bottom: 20px; line-height: 1.6; }
+
+.divider {
+    border: none;
+    border-top: 1px solid #eaeaea;
+    margin: 30px 0;
+}
+
+.stats-row { gap: 50px; }
+.stat h3 { font-family: serif; font-size: 32px; color: #0B5C46; }
+.stat p { font-size: 13px; color: #666; margin-top: 5px; }
+
+/* === FOOTER === */
+.site-footer {
+    background-color: #bddaf8; /* Soft blue from screenshot */
+    padding: 60px 0;
+}
+
+.footer-layout { justify-content: space-between; align-items: flex-end; }
+.footer-brand h2 { font-family: serif; color: #0B5C46; font-size: 32px; margin-bottom: 5px; }
+.footer-brand p { color: #555; font-size: 14px; }
+.footer-links { gap: 20px; }
+.footer-links a { color: #555; font-size: 13px; text-decoration: none; font-weight: bold; }
+.footer-links a:hover { color: #0B5C46; }
+
 @media (max-width: 768px) {
-    
-    /* --- (Keep your existing split-screen rules here) --- */
+   
     .split-screen {
         flex-direction: column; 
         height: auto; 
     }
   .left-pane {
-        display: none; /* This makes the entire image side vanish on phones! */
+        display: none;
     }
 .right-pane {
         flex: none; 
         width: 100%;
-        min-height: 100vh; /* Forces the form to take up the full height of the phone */
+        min-height: 100vh;
         padding: 30px 20px; 
     }
-/* =========================================
+/*
        MOBILE NAVBAR & SLIDE-OUT MENU
-    ========================================= */
-  /* =========================================
-       MOBILE NAVBAR & SLIDE-OUT MENU
-    ========================================= */
     
     /* Fix the Navbar Height & Padding */
     .navbar {
@@ -485,16 +772,16 @@ a {
     
     /* Center everything in the navbar */
     .navbar .flex {
-        position: relative; /* This is the anchor for the absolute icon! */
+        position: relative;
         flex-direction: row; 
-        justify-content: center; /* Pushes the logo perfectly to the center */
+        justify-content: center;
         align-items: center;
         height: 100%;
     }
 
     /* Increase font size and keep it on one line */
     .logo {
-        font-size: 24px !important; /* INCREASED from 20px */
+        font-size: 24px !important; 
         white-space: nowrap; 
         padding: 0 !important;
         margin: 0;
@@ -504,7 +791,7 @@ a {
     #menu-icon {
         display: block;
         position: absolute; 
-        left: 15px; /* Pins it 15px from the left edge */
+        left: 15px; 
         font-size: 24px;
         color: #0B5C46;
         cursor: pointer;
@@ -530,7 +817,7 @@ a {
 
     /* The "Active" state that JavaScript will trigger */
     .navbar ul.active {
-        left: 0; /* Slides the menu onto the screen! */
+        left: 0;
     }
 
     /* Fix the massive link padding */
@@ -540,11 +827,53 @@ a {
         display: block;
     }
     #menu-icon {
-        display: block; /* This brings it back on mobile! */
+        display: block; 
         position: absolute; 
         left: 15px; 
         font-size: 24px;
         color: #0B5C46;
         cursor: pointer;
+    }
+    /* Mobile Fix for Product Preview */
+    .preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .preview-grid {
+        grid-template-columns: 1fr; /* Stacks the cards on mobile! */
+    }
+    /* Mobile Fixes for Philosophy & Footer */
+    .grid-2-col {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .floating-card {
+        bottom: -10px;
+        right: 10px;
+        max-width: 200px;
+    }
+    
+    .footer-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+    }
+    /* Shrink the image on mobile screens */
+    .philosophy-image {
+        max-width: 85%; /* Leaves a nice border of space on small phone screens */
+        margin: 0 auto; 
+    }
+    /* Mobile Fixes for Philosophy */
+    .grid-2-col {
+        grid-template-columns: 1fr;
+        gap: 50px; /* Shrinks the giant 120px gap back down for phones */
+        padding: 0 20px;
     }
 }
