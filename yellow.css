@@ -756,6 +756,30 @@ a {
         height: auto; 
     }
     
+    /* 1. Shrink the giant heading */
+    .showcase-text h2 {
+        font-size: 36px; /* Brings it down to a readable phone size */
+        margin-bottom: 15px;
+    }
+
+    /* 2. Shrink the paragraph slightly */
+    .showcase-text p {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+
+    /* 3. Stop the badge from squishing into a tall oval */
+    .badge {
+        white-space: nowrap; /* Forces the text to stay on one single horizontal line! */
+        font-size: 10px;
+        padding: 6px 12px;
+        margin-bottom: 15px;
+    }
+
+    /* 4. Give the text box some breathing room from the edges */
+    .showcase-text {
+        padding: 0 15px;
+    }
     body {
     margin: 0; 
     padding: 0;
