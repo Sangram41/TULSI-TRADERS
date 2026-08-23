@@ -746,15 +746,26 @@ a {
 .footer-links a { color: #555; font-size: 13px; text-decoration: none; font-weight: bold; }
 .footer-links a:hover { color: #0B5C46; }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) 
+
+    {
    
     /* === SPLIT SCREEN (LOGIN PAGE) === */
     .split-screen {
         flex-direction: column; 
         height: auto; 
     }
+    
+    body {
+    margin: 0; 
+    padding: 0;
+    overflow-x: hidden; 
     .left-pane {
-        display: none;
+    display: none;
+    }
+
+    * {
+    box-sizing: border-box;
     }
     .right-pane {
         flex: none; 
@@ -840,13 +851,12 @@ a {
     .philosophy-text {
         width: 100%; /* Resets the 50/50 desktop split so text takes full width */
     }
-    .floating-card {
-        bottom: -15px;
-        left: -15px; /* Keeps it locked to bottom-left corner */
+  .floating-card {
+        bottom: -20px;
+        left: 10px; /* Changed from -15px to 10px so it stays on the screen! */
         max-width: 200px;
         padding: 15px;
     }
-
     /* === FOOTER FIX === */
     .footer-layout {
         flex-direction: column;
