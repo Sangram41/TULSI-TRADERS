@@ -878,18 +878,11 @@ a {
         display: block !important;
     }
 
-    /* 2. The Actual Picture */
-    .philosophy-image img {
-        position: relative !important;
-        z-index: 5 !important; /* Pulls it forcefully to the front */
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 100% !important;
-        min-height: 300px !important; /* Stops Flexbox from squishing it to 0 height */
-        object-fit: cover !important; /* Ensures the image fills the 300px box perfectly */
-        background-color: #cccccc !important; /* Temporary gray box to test if the link is broken */
-    }
+.philosophy-image img {
+    ...
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+}
     .philosophy-text {
         width: 100% !important; 
         max-width: 100% !important;
