@@ -746,7 +746,7 @@ a {
 .footer-links a { color: #555; font-size: 13px; text-decoration: none; font-weight: bold; }
 .footer-links a:hover { color: #0B5C46; }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
     /* === SPLIT SCREEN (LOGIN PAGE) === */
     .split-screen {
         flex-direction: column; 
