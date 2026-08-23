@@ -882,6 +882,14 @@ a {
     .navbar ul.active {
         left: 0;
     }
+    .navbar .nav-btn,
+    .navbar .nav-btn2 {
+    display: inline-flex !important;
+    width: auto !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;   /* rounded rectangle instead of circle/pill */
+    margin-top: 10px !important;
+}
     .navbar a {
         padding: 15px 0 !important; 
         font-size: 16px;
