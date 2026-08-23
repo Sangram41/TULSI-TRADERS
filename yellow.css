@@ -746,7 +746,7 @@ a {
 .footer-links a { color: #555; font-size: 13px; text-decoration: none; font-weight: bold; }
 .footer-links a:hover { color: #0B5C46; }
 
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
     /* === SPLIT SCREEN (LOGIN PAGE) === */
     .split-screen {
         flex-direction: column; 
@@ -856,40 +856,39 @@ a {
 
     /* === THE ULTIMATE PHILOSOPHY FIX === */
     .philosophy {
-        padding: 50px 0 !important; 
+        padding: 50px 0 !important; /* Reduces massive desktop spacing */
     }
     .grid-2-col {
         display: flex !important;
         flex-direction: column !important; 
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 20px !important; 
+        padding: 0 20px !important; /* Forces a safe edge on the phone */
         margin: 0 !important;
         gap: 40px !important; 
         box-sizing: border-box !important;
     }
-    /* 1. The Wrapper */
+/* 1. The Wrapper */
     .philosophy-image {
         position: relative !important;
         width: 100% !important; 
         max-width: 100% !important;
-        min-height: 350px !important; 
+        min-height: 300px !important; /* Forces a physical box to exist */
         margin: 0 !important;
         display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
     }
 
-    /* 2. The Actual Picture (Forced to the front layer) */
+    /* 2. The Actual Picture */
     .philosophy-image img {
+        position: relative !important;
+        z-index: 5 !important; /* Pulls it forcefully to the front */
         display: block !important;
         width: 100% !important;
-        height: 350px !important; 
-        object-fit: cover !important; 
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: relative !important;
-        z-index: 5 !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        min-height: 300px !important; /* Stops Flexbox from squishing it to 0 height */
+        object-fit: cover !important; /* Ensures the image fills the 300px box perfectly */
+        background-color: #cccccc !important; /* Temporary gray box to test if the link is broken */
     }
     .philosophy-text {
         width: 100% !important; 
@@ -899,7 +898,7 @@ a {
         box-sizing: border-box !important;
     }
     .philosophy-text h2 {
-        font-size: 32px !important; 
+        font-size: 32px !important; /* Stops the title from overflowing */
         width: 100% !important;
     }
     .philosophy-text p, .overline {
@@ -917,7 +916,6 @@ a {
         left: 10px; 
         max-width: 200px;
         padding: 15px;
-        z-index: 10 !important; /* Forced higher than the image so it doesn't get covered */
     }
 
     /* === FOOTER FIX === */
