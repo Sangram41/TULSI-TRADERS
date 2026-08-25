@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tulsi Traders - Shop</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 20px; }
+    /* Navigation Bar */
+    nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #eee; margin-bottom: 20px; }
+    nav .links a { margin-left: 15px; text-decoration: none; color: #333; font-weight: bold; }
+    nav .links a.active { color: #e67e22; }
+
+    /* Controls & Catalog */
+    .toolbar { display: flex; gap: 10px; margin-bottom: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .card { border: 1px solid #ddd; padding: 12px; border-radius: 8px; text-align: center; }
+    .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background-color: #f0f0f0; }
+    button { padding: 6px 12px; cursor: pointer; border: 1px solid #ccc; background: #f8f8f8; border-radius: 4px; }
+    #cart { margin-top: 30px; padding: 16px; background: #fafafa; border: 1px solid #eee; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <h2>TULSI TRADERS</h2>
+    <div class="links">
+      <a href="TULSI1.html">HOME</a>
+      <a href="shop.html" class="active">SHOP</a>
+      <a href="tulip.html">CONTACT US</a>
+      <a href="tulip.html">OUR STORY</a>
+      <a href="login.html">LOGIN</a>
+    </div>
+  </nav>
+
+  <!-- Controls -->
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="Search items..." oninput="render()">
+    <button onclick="setCat('all')">All</button>
+    <button onclick="setCat('Groceries')">Groceries</button>
+    <button onclick="setCat('Spices')">Spices</button>
+    <button onclick="setCat('Daily Essentials')">Daily Essentials</button>
+  </div>
+
+  <!-- Product Catalog -->
+  <div id="catalog" class="grid"></div>
+
+  <!-- Shopping Cart Summary -->
+  <div id="cart">
+    <h3>Shopping Cart (<span id="count">0</span> items)</h3>
+    <ul id="cart-list"></ul>
+    <p><strong>Total: ₹<span id="total">0</span></strong></p>
+    <button onclick="checkout()">Proceed to Checkout</button>
+  </div>
+
+  <script>
+    const fallbackImage = "https://placehold.co/300x200?text=Product+Image";
+
+    const items = [
+      { id: 1, name: "Basmati Rice (1kg)", cat: "Groceries", price: 120, img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&auto=format&fit=crop&q=60" },
+      { id: 2, name: "Turmeric Powder (200g)", cat: "Spices", price: 65, img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&auto=format&fit=crop&q=60" },
+      { id: 3, name: "Red Chilli (250g)", cat: "Spices", price: 90, img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&auto=format&fit=crop&q=60" },
+      { id: 4, name: "Pure Cow Ghee (500ml)", cat: "Daily Essentials", price: 340, img: "https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=400&auto=format&fit=crop&q=60" },
+      { id: 5, name: "Cumin Seeds (100g)", cat: "Spices", price: 45, img: "https://images.unsplash.com/photo-1599940824399-b87987ceb72a?w=400&auto=format&fit=crop&q=60" },
+      { id: 6, name: "Toor Dal (1kg)", cat: "Groceries", price: 160, img: "https://images.unsplash.com/photo-1585994192701-f1a505c817ee?w=400&auto=format&fit=crop&q=60" }
+    ];
+
+    // Load cart from localStorage or start empty
+    let cart = JSON.parse(localStorage.getItem('tulsi_cart')) || {};
+    let currentCat = 'all';
+
+    function saveCart() {
+      localStorage.setItem('tulsi_cart', JSON.stringify(cart));
+    }
+
+    function setCat(cat) {
+      currentCat = cat;
+      render();
+    }
+
+    function updateQty(id, delta) {
+      cart[id] = (cart[id] || 0) + delta;
+      if (cart[id] <= 0) delete cart[id];
+      saveCart(); // Persist changes
+      render();
+    }
+
+    function render() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const filtered = items.filter(p => 
+        (currentCat === 'all' || p.cat === currentCat) && 
+        p.name.toLowerCase().includes(query)
+      );
+
+      // Render Catalog
+      document.getElementById('catalog').innerHTML = filtered.map(p => {
+        const qty = cart[p.id] || 0;
+        return `
+          <div class="card">
+            <img src="${p.img}" alt="${p.name}" onerror="this.onerror=null; this.src='${fallbackImage}';">
+            <h4>${p.name}</h4>
+            <p>₹${p.price}</p>
+            ${qty === 0 
+              ? `<button onclick="updateQty(${p.id}, 1)">Add to Cart</button>` 
+              : `<button onclick="updateQty(${p.id}, -1)">-</button> ${qty} <button onclick="updateQty(${p.id}, 1)">+</button>`
+            }
+          </div>`;
+      }).join('');
+
+      // Render Cart
+      const cartKeys = Object.keys(cart);
+      let total = 0, count = 0;
+      document.getElementById('cart-list').innerHTML = cartKeys.length ? cartKeys.map(id => {
+        const item = items.find(p => p.id == id);
+        const qty = cart[id];
+        total += item.price * qty;
+        count += qty;
+        return `<li>${item.name} x ${qty} = ₹${item.price * qty}</li>`;
+      }).join('') : '<li>Cart is empty</li>';
+
+      document.getElementById('count').textContent = count;
+      document.getElementById('total').textContent = total;
+    }
+
+    function checkout() {
+      if (!Object.keys(cart).length) return alert("Your cart is empty!");
+      alert("Order placed successfully!");
+      cart = {};
+      saveCart(); // Clear stored data
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
