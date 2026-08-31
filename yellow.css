@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+#menu-icon {
+    display: none; 
+}
+
 :root {
     --primary-color: #09310f32;
 }
@@ -9,6 +13,7 @@
     padding: 0;
     margin: 0;
 }
+
 
 body {
     font-family: 'Lato', sans-serif;
@@ -27,7 +32,7 @@ h2 {
     font-family: serif;
     line-height: 1.2;
     margin: 10px 0;
-    color:#0B5C46;
+    color:#56e216;
 }
 
 p {
@@ -53,6 +58,16 @@ a {
     background-color: var(--primary-color);
     color: #333;
     height: 80px;
+
+    transition: height 0.3s ease, box-shadow 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar.scrolled {
+    height: 60px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
 }
 
 .navbar .flex {
@@ -62,19 +77,37 @@ a {
 .navbar ul {
     display: flex;
     align-items: center; 
+    gap: 20px;
 }
-
 .navbar a {
-    color: rgb(2, 8, 7);
+     color: rgb(2, 8, 7);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 14px;
+    padding: 69px; color: rgb(2, 8, 7);
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: 14px;
     padding: 69px;
-    margin: 0 0px;
+      margin: 0 0px;
+    position: relative;
+    /* ...keep existing properties... */
 }
 
-.navbar a:hover {
-    border-bottom: 2px solid #333;
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #0B5C46;
+    transition: 0.3s ease;
+    transform: translateX(-50%);
 }
+
+.navbar a:hover::after {
+    width: 60%;
+}
+
 
 /* Showcase */
 .showcase {
@@ -91,11 +124,11 @@ a {
 
 .showcase h1 {
     font-size: 40px;
-      color: #0B5C46;
+      color: #8ff216;
 }
 
 .showcase a{
-      color: #0B5C46;
+      color: #a4e713;
       font-size: 20px;
       font-weight : bold;
       border-color: #0B5C46;
@@ -115,12 +148,98 @@ a {
     gap: 30px;
 }
 
+
+/* --- Showcase Typography & Badge --- */
+
+
+.badge {
+    display: inline-block;
+    background: #ffffff;
+    color: #0B5C46;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    
+}
+
+.showcase-text {
+    margin-top: 200px; 
+    margin-left: 60px; 
+    animation: fadeSlideUp 0.8s ease-out both;
+}
+
+.showcase-text h2 {
+    font-size: 55px; 
+    font-family: serif;
+    color: #ffffff; /* Changed to bright white */
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* Adds a dark glow behind the text */
+}
+
+.showcase-text h2 em {
+    font-style: italic;
+}
+.showcase-text p {
+    color: #f1f8f5; /* Changed to a very light mint-white */
+    font-size: 30px;
+    max-width: 500px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+}
+
+/* --- Showcase Buttons --- */
+.button-group {
+    display: flex;
+    gap: 15px; /* Spaces the buttons perfectly */
+}
+
+.btn-solid, .btn-outline {
+    padding: 12px 24px;
+    border-radius: 6px; /* Slightly rounded squares, like the image */
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+    text-align: center;
+}
+.btn-solid {
+    background-color: #0B5C46;
+    color: #ffffff;
+    border: 2px solid #0B5C46;
+}
+.btn-solid:hover, .btn-outline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(11, 92, 70, 0.25);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #0B5C46;
+    border: 2px solid #0B5C46;
+}
+
+.btn-outline:hover {
+    background-color: rgba(11, 92, 70, 0.1);
+}
+
+
 /* Forms */
+.showcase-form .logo{
+    color: #2e5c0b;
+    font-family: serif;
+    font-size: 40px;
+    padding:20px;
+}
 .showcase-form {
     position: relative;
     height: auto;
     width: 400px;
-    padding: 40px#0B5C46;
+    padding: 40px;
     z-index: 100;
     margin: 40px auto;
 }
@@ -143,6 +262,10 @@ a {
 .showcase-form input:focus {
     outline: none;
 }
+
+
+
+
 
 /* Utilities */
 .container {
@@ -178,8 +301,22 @@ a {
 .nav-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px; /* Adds perfect spacing between the icon and the text */
-    padding: 8px 18px !important; /* Smaller padding than your main buttons */
+    gap: 8px; 
+    padding: 8px 18px !important; 
+    background-color: #0B5C46;
+    color: #ffffff !important;
+    border-radius: 50px;
+    font-size: 13px !important;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.nav-btn2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; 
+    padding: 8px 18px !important; 
     background-color: #0B5C46;
     color: #ffffff !important;
     border-radius: 50px;
@@ -194,4 +331,660 @@ a {
     background-color: transparent;
     border: 1px solid #0B5C46;
     color: rgb(11, 92, 70);
+}
+
+
+
+/* 
+   SPLIT-SCREEN LOGIN PAGE STYLES
+*/
+.login-body {
+    margin: 0;
+}
+
+.split-screen {
+    display: flex;
+    min-height: 100vh; 
+    width: 100%;       
+}
+/* --- Left Pane (Image) --- */
+.left-pane {
+    flex: 1; 
+    background-image: url('https://cdn.pixabay.com/photo/2024/09/20/01/37/spice-market-9060102_1280.jpg'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glass-box {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 350px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.glass-box h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+.glass-box p {
+    font-size: 14px;
+    color: #1E332B;
+}
+
+/* --- Right Pane (Form Container) --- */
+.right-pane {
+    flex: 1; 
+    background-color: #FAFBFC; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* --- Tabs --- */
+.form-tabs {
+    display: flex;
+    border-bottom: 1px solid #E0E0E0;
+    margin-bottom: 30px;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    text-decoration: none; 
+}
+
+.tab.active {
+    color: #0B5C46;
+    border-bottom: 2px solid #0B5C46;
+}
+
+
+
+/* --- Form Headers & Labels --- */
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    color: #0A192F;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    font-size: 13px;
+    color: #666;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.label-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-link {
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* --- Input Fields with Icons --- */
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon-wrapper i {
+    position: absolute;
+    left: 15px;
+    color: #888;
+    font-size: 14px;
+}
+
+.input-icon-wrapper input {
+    width: 100%;
+    padding: 12px 15px 12px 40px; 
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+    background: #fff;
+}
+
+.input-icon-wrapper input:focus {
+    border-color: #0B5C46;
+}
+
+/* --- Submit Button --- */
+.btn-login-submit {
+    width: 100%;
+    background-color: #0a6e53 !important; 
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 50px !important;
+    margin-top: 10px;
+}
+
+/* --- Divider (OR CONTINUE WITH) --- */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 30px 0;
+    color: #888;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.divider span {#0B5C46
+    padding: 0 10px;
+}
+
+/* --- Social Buttons --- */
+.social-logins {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #0B5C46;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: #f1f1f1;
+}
+
+.social-btn i {
+    font-size: 16px;
+}
+
+/* === PRODUCT PREVIEW SECTION === */
+.product-preview {
+    background-color: #cae4c5 ;
+    padding : 350px 0px 350px; 
+}
+
+.preview-header {
+    display: oot]lex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.preview-header h2 {
+    font-family: serif;
+    font-size: 36px;
+    color: #0B5C46;
+    margin-bottom: 10px;
+}
+
+.preview-header p {
+    color: #555;
+    max-width: 500px;
+}
+
+.view-all {
+    color: #4a7c59;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* --- The Grid --- */
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Equal Columns */
+    gap: 30px;
+}
+
+/* --- The Cards --- */
+.product-card {
+    height: 500%;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none; /* Removes the ugly blue link underline */
+    color: inherit;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-30px); 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.card-image {
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tags on the images */
+.badge-organic, .badge-local, .badge-signature {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #1a4028;
+}
+.badge-organic { background-color: #bbf067; }
+.badge-local { background-color: #f0ec67; }
+.badge-signature { background-color: #0B5C46; color: white; }
+
+.card-content {
+    padding: 25px;
+    flex-grow: 1; /* Pushes the footer to the bottom */
+}
+
+.card-content h3 {
+    color: #0B5C46;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Footer (Price & Stock) */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0B5C46;
+}
+
+.price .unit {
+    font-size: 14px;
+    color: #888;
+    font-weight: normal;
+}
+
+.stock {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.in-stock { color: #4a7c59; }
+.low-stock { color: #d9534f; }
+
+/* === PHILOSOPHY SECTION === */
+.philosophy {
+    background-color:#cae4c5;
+    padding-right: 215px;
+    padding-bottom: 315px;
+    max-width: 100%;
+}
+
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Image & Floating Card */
+.philosophy-image {
+    position: relative; 
+    max-height: 70%;
+    max-width: 55%; 
+}
+
+.philosophy-image img {
+    margin-left: 400px;
+    margin-bottom: 125px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.philosophy-text{
+    padding-right: 100px;
+}
+.philosophy-image, .philosophy-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.philosophy-image.in-view, .philosophy-text.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+.floating-card {
+    position: absolute;
+    bottom: -70px;
+    right: -440px;
+    background: #f4f7fb;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    max-width: 250px;
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.floating-card i { color: #588b68; font-size: 24px; margin-bottom: 10px; }
+.floating-card h4 { color: #0B5C46; margin-bottom: 5px; }
+.floating-card p { font-size: 13px; color: #555; }
+
+/* Text Side */
+.overline {
+    color: #6a9c78;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.philosophy-text h2 {
+    font-family: serif;
+    font-size: 42px;
+    color: #0B5C46;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.philosophy-text p { color: #555; margin-bottom: 20px; line-height: 1.6; }
+
+.divider {
+    border: none;
+    border-top: 1px solid #eaeaea;
+    margin: 30px 0;
+}
+
+.stats-row { gap: 50px; }
+.stat h3 { font-family: serif; font-size: 32px; color: #0B5C46; }
+.stat p { font-size: 13px; color: #666; margin-top: 5px; }
+
+/* === FOOTER === */
+.site-footer {
+    background-color: #bddaf8; /* Soft blue from screenshot */
+    padding: 60px 0;
+}
+
+.footer-layout { justify-content: space-between; align-items: flex-end; }
+.footer-brand h2 { font-family: serif; color: #0B5C46; font-size: 32px; margin-bottom: 5px; }
+.footer-brand p { color: #555; font-size: 14px; }
+.footer-links { gap: 20px; }
+.footer-links a { color: #555; font-size: 13px; text-decoration: none; font-weight: bold; }
+.footer-links a:hover { color: #0B5C46; }
+
+@media (max-width: 768px) {
+    /* === SPLIT SCREEN (LOGIN PAGE) === */
+    .split-screen {
+        flex-direction: column; 
+        height: auto; 
+    }
+    .left-pane {
+        display: none;
+    }
+    .right-pane {
+        flex: none; 
+        width: 100%;
+        min-height: 100vh;
+        padding: 30px 20px; 
+    }
+
+    /* === UN-SQUISH THE SHOWCASE === */
+    .showcase .grid {
+        display: block !important; 
+    }
+    .showcase-text {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important; 
+        padding: 0 20px !important; 
+        text-align: center !important; 
+    }
+    .showcase-text h2 {
+        font-size: 36px; 
+        margin-bottom: 15px;
+    }
+    .showcase-text p {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+    .badge {
+        white-space: nowrap; 
+        font-size: 10px;
+        padding: 6px 12px;
+        margin-bottom: 15px;
+    }
+    .button-group {
+        justify-content: center !important; 
+    }
+
+    /* === MOBILE NAVBAR === */
+    .navbar {
+        height: 60px;
+        padding: 0 15px; 
+    }
+    .navbar .flex {
+        position: relative;
+        flex-direction: row; 
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    .logo {
+        font-size: 24px !important; 
+        white-space: nowrap; 
+        padding: 0 !important;
+        margin: 0;
+    }
+    #menu-icon {
+        display: block;
+        position: absolute; 
+        left: 15px; 
+        font-size: 24px;
+        color: #0B5C46;
+        cursor: pointer;
+    }
+    .navbar ul {
+        position: fixed;
+        top: 0;
+        left: -100%; 
+        width: 250px;
+        height: 100vh; 
+        background-color: #f1f8f5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 30px;
+        transition: 0.4s ease; 
+        box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        margin: 0;
+    }
+    .navbar ul.active {
+        left: 0;
+    }
+    .navbar .nav-btn,
+    .navbar .nav-btn2 {
+    display: inline-flex !important;
+    width: auto !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;   /* rounded rectangle instead of circle/pill */
+    margin-top: 10px !important;
+}
+    .navbar a {
+        padding: 15px 0 !important; 
+        font-size: 16px;
+        display: block;
+    }
+    .navbar ul li {
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar ul.active li:nth-child(1) { transition-delay: 0.1s; }
+.navbar ul.active li:nth-child(2) { transition-delay: 0.15s; }
+.navbar ul.active li:nth-child(3) { transition-delay: 0.2s; }
+.navbar ul.active li:nth-child(4) { transition-delay: 0.25s; }
+.navbar ul.active li:nth-child(5) { transition-delay: 0.3s; }
+
+.navbar ul.active li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+    /* === PRODUCT PREVIEW FIX === */
+    .preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .preview-grid {
+        display: grid;
+        grid-template-columns: 1fr; 
+    }
+
+    /* === THE ULTIMATE PHILOSOPHY FIX === */
+    .philosophy {
+        padding: 50px 0 !important; /* Reduces massive desktop spacing */
+    }
+    .grid-2-col {
+        display: flex !important;
+        flex-direction: column !important; 
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 20px !important; /* Forces a safe edge on the phone */
+        margin: 0 !important;
+        gap: 40px !important; 
+        box-sizing: border-box !important;
+    }
+/* 1. The Wrapper */
+    .philosophy-image {
+        position: relative !important;
+        width: 100% !important; 
+        max-width: 100% !important;
+        min-height: 300px !important; /* Forces a physical box to exist */
+        margin: 0 !important;
+        display: block !important;
+    }
+.philosophy-image img {
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+}
+    .philosophy-text {
+        width: 100% !important; 
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    .philosophy-text h2 {
+        font-size: 32px !important; /* Stops the title from overflowing */
+        width: 100% !important;
+    }
+    .philosophy-text p, .overline {
+        width: 100% !important; 
+        max-width: 100% !important; 
+    }
+    .stats-row {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 30px !important;
+        width: 100% !important;
+    }
+    .floating-card {
+        bottom: -20px;
+        left: 10px; 
+        max-width: 200px;
+        padding: 15px;
+    }
+
+    /* === FOOTER FIX === */
+    .footer-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .footer-links {
+        flex-wrap: wrap;
+    }
 }

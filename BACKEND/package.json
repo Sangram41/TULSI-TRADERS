@@ -1,0 +1,16 @@
+{
+  "name": "tulsi_traders",
+  "version": "1.0.0",
+  "description": "This is website for college project.....",
+  "keywords": [
+    "tulsi",
+    "traders"
+  ],
+  "license": "ISC",
+  "author": "sangram",
+  "type": "commonjs",
+  "main": "server1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
