@@ -89,9 +89,7 @@ if (loginForm) {
   });
 }
 
-
 // PHASE 5: GOOGLE LOGIN
-
 
 // 1. Find the Google button on the page
 const googleBtn = document.getElementById("google-btn");
@@ -180,6 +178,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // 3. Make the Logout button actually work
+
 if (logoutBtn) {
   logoutBtn.addEventListener("click", function(event) {
     event.preventDefault(); 
@@ -193,9 +192,8 @@ if (logoutBtn) {
   });
 }
 
-// ==========================================
 // MOBILE MENU TOGGLE
-// ==========================================
+
 const menuIcon = document.getElementById("menu-icon");
 const navMenu = document.querySelector(".navbar ul");
 
@@ -206,9 +204,8 @@ if (menuIcon && navMenu) {
   });
 }
 
-// ==========================================
 // SCROLL REVEAL — PHILOSOPHY SECTION
-// ==========================================
+
 const revealTargets = document.querySelectorAll(".philosophy-image, .philosophy-text");
 
 if (revealTargets.length) {
@@ -224,9 +221,7 @@ if (revealTargets.length) {
   revealTargets.forEach(el => observer.observe(el));
 }
 
-// ==========================================
 // STAT COUNTER (Philosophy section)
-// ==========================================
 const statNumbers = document.querySelectorAll(".stat h3");
 
 if (statNumbers.length) {
@@ -262,9 +257,8 @@ if (statNumbers.length) {
   statNumbers.forEach(el => statObserver.observe(el));
 }
 
-// ==========================================
 // SHRINK NAVBAR ON SCROLL
-// ==========================================
+
 const navbarEl = document.querySelector(".navbar");
 
 if (navbarEl) {

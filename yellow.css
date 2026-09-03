@@ -80,14 +80,14 @@ a {
     gap: 20px;
 }
 .navbar a {
-     color: rgb(2, 8, 7);
+    color: rgb(2, 8, 7);
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: 14px;
     padding: 69px; color: rgb(2, 8, 7);
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: 14px;
     padding: 69px;
-      margin: 0 0px;
+    margin: 0 0px;
     position: relative;
     /* ...keep existing properties... */
 }
@@ -124,14 +124,14 @@ a {
 
 .showcase h1 {
     font-size: 40px;
-      color: #8ff216;
+    color: #8ff216;
 }
 
 .showcase a{
-      color: #a4e713;
-      font-size: 20px;
-      font-weight : bold;
-      border-color: #0B5C46;
+    color: #a4e713;
+    font-size: 20px;
+    font-weight : bold;
+    border-color: #0B5C46;
 }
 
 
@@ -171,7 +171,15 @@ a {
     margin-left: 60px; 
     animation: fadeSlideUp 0.8s ease-out both;
 }
+.badge { animation: fadeSlideUp 0.8s ease-out 0.1s both; }
+.showcase-text h2 { animation: fadeSlideUp 0.8s ease-out 0.25s both; }
+.showcase-text p { animation: fadeSlideUp 0.8s ease-out 0.4s both; }
+.button-group { animation: fadeSlideUp 0.8s ease-out 0.55s both; }
 
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 .showcase-text h2 {
     font-size: 55px; 
     font-family: serif;
@@ -336,7 +344,7 @@ a {
 
 
 /* 
-   SPLIT-SCREEN LOGIN PAGE STYLES
+SPLIT-SCREEN LOGIN PAGE STYLES
 */
 .login-body {
     margin: 0;
@@ -706,7 +714,7 @@ a {
 }
 
 .philosophy-image img {
-    margin-left: 400px;
+    margin-left: 300px;
     margin-bottom: 125px;
     width: 100%;
     border-radius: 12px;
@@ -729,7 +737,7 @@ a {
 .floating-card {
     position: absolute;
     bottom: -70px;
-    right: -440px;
+    right: -380px;
     background: #f4f7fb;
     padding: 25px;
     border-radius: 12px;
@@ -790,6 +798,178 @@ a {
 .footer-links { gap: 20px; }
 .footer-links a { color: #555; font-size: 13px; text-decoration: none; font-weight: bold; }
 .footer-links a:hover { color: #0B5C46; }
+/* ===================================
+   SHOP PAGE
+=================================== */
+
+/* --- Hero Banner --- */
+.shop-hero {
+    background-color: #cae4c5;
+    padding: 60px 0;
+}
+
+.shop-hero .overline {
+    color: #4a7c59;
+}
+
+.shop-hero h2 {
+    font-family: serif;
+    font-size: 40px;
+    color: #0B5C46;
+    margin-bottom: 10px;
+}
+
+.shop-hero p {
+    max-width: 600px;
+    color: #3a4a3f;
+}
+
+/* --- Body Layout --- */
+.shop-body {
+    padding: 50px 0;
+}
+
+.shop-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* --- Filter Sidebar --- */
+.shop-filters h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #0B5C46;
+    margin: 25px 0 12px;
+}
+
+.shop-filters h4:first-child {
+    margin-top: 0;
+}
+
+.filter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-pill {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #555;
+    transition: 0.25s ease;
+}
+
+.filter-pill:hover {
+    background: #f1f8f5;
+    color: #0B5C46;
+}
+
+.filter-pill.active {
+    background: #0B5C46;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* --- Toolbar --- */
+.shop-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.result-count {
+    color: #666;
+    font-size: 14px;
+}
+
+.sort-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+.sort-control select {
+    padding: 8px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+/* --- Product Grid (shop-specific card shell) --- */
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.shop-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.shop-card:hover {
+    transform: translateY(-25px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.shop-card .card-image {
+    height: 180px;
+}
+
+/* --- Pagination --- */
+.shop-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.page-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #D1D5DB;
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.25s ease;
+}
+
+.page-btn:hover {
+    border-color: #0B5C46;
+    color: #0B5C46;
+}
+
+.page-btn.active {
+    background: #0B5C46;
+    border-color: #0B5C46;
+    color: #ffffff;
+}
+
+.page-next {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
 
 @media (max-width: 768px) {
     /* === SPLIT SCREEN (LOGIN PAGE) === */
@@ -818,6 +998,7 @@ a {
         padding: 0 20px !important; 
         text-align: center !important; 
     }
+
     .showcase-text h2 {
         font-size: 36px; 
         margin-bottom: 15px;
@@ -987,4 +1168,47 @@ a {
     .footer-links {
         flex-wrap: wrap;
     }
+    .shop-layout {
+        grid-template-columns: 1fr;
+    }
+    .shop-sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .category-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .featured-grid, .small-grid {
+        grid-template-columns: 1fr;
+    }
+    .shop-layout {
+        grid-template-columns: 1fr;
+    }
+    .shop-filters {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .filter-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .filter-pill {
+        width: auto;
+    }
+    .shop-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .shop-grid {
+        grid-template-columns: 1fr;
+    }
+    .shop-hero h2 {
+        font-size: 30px;
+    }
+
 }
