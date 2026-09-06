@@ -21,7 +21,7 @@
                     <li><a href="shop.html">SHOP</a></li>
                     <li><a href="/home/sangram/TULSI-TRADERS/progess.html">CONTACT US</a></li>
                     <li><a href="/home/sangram/TULSI-TRADERS/progess.html">OUR STORY</a></li>
-                    <li><a href="/home/sangram/TULSI-TRADERS/progess.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
+                   <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
                     <li id="login-nav-item">
                         <a href="login.html" class="nav-btn">
                             <i class="fa-solid fa-right-to-bracket fa-bounce"></i> LOGIN
@@ -88,20 +88,27 @@
 
                 <div class="shop-grid">
 
-                    <a href="#" class="shop-card">
-                        <div class="card-image">
-                            <span class="badge-organic">Organic</span>
-                            <img src="https://cdn.pixabay.com/photo/2015/10/01/20/23/cashew-nuts-967650_1280.jpg" alt="Cashew">
-                        </div>
-                        <div class="card-content">
-                            <h3>Organic Cashew</h3>
-                            <p>Creamy, rich texture perfect for spreading or slicing.</p>
-                            <div class="card-footer">
-                                <span class="price">4.99 <span class="unit">/ea</span></span>
-                                <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
-                            </div>
-                        </div>
-                    </a>
+          <div class="shop-card">
+    <div class="card-image">
+        <span class="badge-organic">Organic</span>
+        <img src="https://cdn.pixabay.com/photo/2015/10/01/20/23/cashew-nuts-967650_1280.jpg" alt="Cashew">
+    </div>
+    <div class="card-content">
+        <h3>Organic Cashew</h3>
+        <p>Creamy, rich texture perfect for spreading or slicing.</p>
+        <div class="card-footer">
+            <span class="price">4.99 <span class="unit">/ea</span></span>
+            <!-- === NEW ADD TO CART BUTTON === -->
+            <button class="add-to-cart-btn" 
+                data-id="prod_cashew01" 
+                data-name="Organic Cashew" 
+                data-price="4.99" 
+                data-image="https://cdn.pixabay.com/photo/2015/10/01/20/23/cashew-nuts-967650_1280.jpg">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+</div>
 
                     <a href="#" class="shop-card">
                         <div class="card-image">

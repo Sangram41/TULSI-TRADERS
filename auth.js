@@ -1,6 +1,10 @@
 // 1. Import Firebase tools directly from Google's servers
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+// === NEW FIRESTORE IMPORTS ===
+import { getFirestore, doc, setDoc, getDoc, arrayUnion, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBi3NuEGxFg9prR-EHmKuAIs_a4pCEzKcE",
   authDomain: "tulsi-traders-482a5.firebaseapp.com",
@@ -13,12 +17,12 @@ const firebaseConfig = {
 
 // 3. Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 export const auth = getAuth(app);
 
-console.log("Firebase is successfully connected!");
-
-
+// === INITIALIZE FIRESTORE ===
+export const db = getFirestore(app);
+console.log("Firebase & Firestore are successfully connected!");
+ 
 
 // PHASE 3: SIGN UP NEW USERS
 
@@ -150,6 +154,25 @@ if (githubBtn) {
   });
 }
 
+
+// Add this line at the top of PHASE 7
+export let currentUserUID = null; 
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    currentUserUID = user.uid; // Store the ID for the cart to use!
+    
+    if (loginNavItem) loginNavItem.style.display = "none";
+    if (logoutNavItem) logoutNavItem.style.display = "block";
+    if (userEmailDisplay) userEmailDisplay.innerText = user.email;
+  } else {
+    currentUserUID = null; // Clear it when they log out
+    
+    if (loginNavItem) loginNavItem.style.display = "block";
+    if (logoutNavItem) logoutNavItem.style.display = "none";
+  }
+});
+
 // PHASE 7: WATCH AUTH STATE & LOGOUT
 
 // 1. Find the navbar items
@@ -266,4 +289,93 @@ if (navbarEl) {
     navbarEl.classList.toggle("scrolled", window.scrollY > 50);
   });
 }
+// === PHASE 8: BULLETPROOF FIRESTORE ADD TO CART ===
 
+// Listen to the entire document for clicks
+document.addEventListener("click", async (event) => {
+  
+  // Check if the exact thing they clicked was our cart button
+  if (event.target.classList.contains("add-to-cart-btn")) {
+    event.preventDefault(); // Stop the page from jumping
+    
+    const button = event.target;
+
+    // Check login status
+    if (!currentUserUID) {
+      alert("Please log in to add items to your cart!");
+      window.location.href = "login.html";
+      return;
+    }
+
+    // Grab the data
+    const productData = {
+      id: button.getAttribute("data-id"),
+      name: button.getAttribute("data-name"),
+      price: parseFloat(button.getAttribute("data-price")),
+      image: button.getAttribute("data-image"),
+      quantity: 1
+    };
+
+    try {
+      const cartRef = doc(db, "carts", currentUserUID);
+      const cartSnap = await getDoc(cartRef);
+
+      if (cartSnap.exists()) {
+        await updateDoc(cartRef, { items: arrayUnion(productData) });
+      } else {
+        await setDoc(cartRef, { items: [productData] });
+      }
+      alert(productData.name + " was successfully added to your secure cart!");
+    } catch (error) {
+      console.error("Firestore Error: ", error);
+      alert("Failed to add to cart. Check your browser console.");
+    }
+  }
+});
+
+// === PHASE 9: DISPLAY FIRESTORE CART ITEMS ===
+const cartContainer = document.getElementById("cart-items-container");
+
+if (cartContainer) {
+  // Listen for login status specifically on the cart page
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const cartRef = doc(db, "carts", user.uid);
+        const cartSnap = await getDoc(cartRef);
+        
+        if (cartSnap.exists() && cartSnap.data().items.length > 0) {
+          const items = cartSnap.data().items;
+          cartContainer.innerHTML = ""; // Clear the "Loading" text
+          let subtotal = 0;
+
+          // Loop through database items and inject HTML
+          items.forEach(item => {
+            subtotal += item.price;
+            cartContainer.innerHTML += `
+              <div class="cart-item-card">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="cart-item-details">
+                  <h4>${item.name}</h4>
+                  <p class="cart-item-price">${item.price.toFixed(2)}</p>
+                </div>
+              </div>
+            `;
+          });
+
+          // Update the price summary UI
+          document.getElementById("cart-subtotal").innerText = subtotal.toFixed(2);
+          document.getElementById("cart-total").innerText = subtotal.toFixed(2);
+          
+        } else {
+          cartContainer.innerHTML = `<p class="empty-cart-msg">Your cart is completely empty.</p>`;
+        }
+      } catch (error) {
+        console.error("Error loading cart from database: ", error);
+        cartContainer.innerHTML = `<p class="empty-cart-msg">Error loading your secure cart.</p>`;
+      }
+    } else {
+      cartContainer.innerHTML = `<p class="empty-cart-msg">Please <a href="login.html">log in</a> to view your cart.</p>`;
+    }
+  });
+}

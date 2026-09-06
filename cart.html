@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="yellow.css?v=2">
+    <title>CART - Tulsi Traders</title>
+</head>
+<body>
+     <div class="navbar">
+        <div class="container flex">
+            <i class="fa-solid fa-bars" id="menu-icon"></i>
+            <a href="TULSI1.html" >
+        <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
+    </a>
+            <nav>
+                <ul>
+                    <li><a href="shop.html">SHOP</a></li>
+                    <li><a href="progress.html">CONTACT US</a></li>
+                    <li><a href="about.html">OUR STORY</a></li>
+                 <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
+                    <li id="login-nav-item">
+                    <a href="login.html" class="nav-btn">
+                    <i class="fa-solid fa-right-to-bracket fa-bounce"></i></i> LOGIN</a>
+                    <li id="logout-nav-item" style="display: none;">
+                    <a href="#" id="logout-btn" class="nav-btn">
+                    <i class="fa-solid fa-right-to-bracket fa-bounce"></i></i> <span id="user-email-display">EMAIL</span> | LOGOUT
+                    </a>
+                    </li>
+                    </li>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Cart Layout -->
+    <section class="cart-page">
+        <div class="container cart-layout">
+            
+            <div class="cart-items">
+                <h2>Your Harvest</h2>
+                <div id="cart-items-container">
+                    <p class="empty-cart-msg">Loading your cart...</p>
+                </div>
+            </div>
+
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Calculated at checkout</span>
+                </div>
+                <hr class="divider">
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+
+        </div>
+    </section>
+
+<footer class="site-footer">
+    <div class="container flex footer-layout">
+        <div class="footer-brand">
+            <h2>Tulsi Traders</h2>
+            <p>Cultivating Freshness.</p>
+        </div>
+        <div class="footer-links flex">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Shipping Info</a>
+            <a href="#">Wholesale</a>
+        </div>
+    </div>
+</footer>
+    
+    <script type="module" src="auth.js"></script>
+</body>
+</html>
