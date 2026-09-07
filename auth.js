@@ -288,34 +288,48 @@ if (navbarEl) {
   window.addEventListener("scroll", () => {
     navbarEl.classList.toggle("scrolled", window.scrollY > 50);
   });
-}
-// === PHASE 8: BULLETPROOF FIRESTORE ADD TO CART ===
+}// === PHASE 8: SMART ADD TO CART ===
 
-// Listen to the entire document for clicks
 document.addEventListener("click", async (event) => {
   
-  // Check if the exact thing they clicked was our cart button
-  if (event.target.classList.contains("add-to-cart-btn")) {
-    event.preventDefault(); // Stop the page from jumping
-    
-    const button = event.target;
+  // 1. Check if the clicked element is our new smart button (or the icon inside it)
+  const button = event.target.closest(".smart-add-to-cart-btn");
+  
+  if (button) {
+    event.preventDefault(); 
 
-    // Check login status
     if (!currentUserUID) {
       alert("Please log in to add items to your cart!");
       window.location.href = "login.html";
       return;
     }
 
-    // Grab the data
+    // 2. Look "up" the HTML tree to find the specific product card wrapper
+    const productCard = button.closest(".shop-card");
+
+    // 3. Scrape the specific data from this card's HTML
+    // We use .innerText and .src to grab what is visible on the screen
+    const rawName = productCard.querySelector("h3").innerText;
+    
+    // We grab the price text (e.g., "4.99 /ea") and strip out everything except numbers and decimals
+    const rawPriceText = productCard.querySelector(".price").innerText;
+    const cleanPrice = parseFloat(rawPriceText.replace(/[^0-9.]/g, '')); 
+    
+    const rawImage = productCard.querySelector("img").src;
+
+    // Create a unique ID by removing spaces and making the name lowercase
+    const generatedId = "prod_" + rawName.replace(/\s+/g, '').toLowerCase();
+
+    // 4. Build the data object
     const productData = {
-      id: button.getAttribute("data-id"),
-      name: button.getAttribute("data-name"),
-      price: parseFloat(button.getAttribute("data-price")),
-      image: button.getAttribute("data-image"),
+      id: generatedId,
+      name: rawName,
+      price: cleanPrice,
+      image: rawImage,
       quantity: 1
     };
 
+    // 5. Send it to Firestore
     try {
       const cartRef = doc(db, "carts", currentUserUID);
       const cartSnap = await getDoc(cartRef);
@@ -325,57 +339,10 @@ document.addEventListener("click", async (event) => {
       } else {
         await setDoc(cartRef, { items: [productData] });
       }
-      alert(productData.name + " was successfully added to your secure cart!");
+      alert(productData.name + " was successfully added to your cart!");
     } catch (error) {
       console.error("Firestore Error: ", error);
       alert("Failed to add to cart. Check your browser console.");
     }
   }
 });
-
-// === PHASE 9: DISPLAY FIRESTORE CART ITEMS ===
-const cartContainer = document.getElementById("cart-items-container");
-
-if (cartContainer) {
-  // Listen for login status specifically on the cart page
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const cartRef = doc(db, "carts", user.uid);
-        const cartSnap = await getDoc(cartRef);
-        
-        if (cartSnap.exists() && cartSnap.data().items.length > 0) {
-          const items = cartSnap.data().items;
-          cartContainer.innerHTML = ""; // Clear the "Loading" text
-          let subtotal = 0;
-
-          // Loop through database items and inject HTML
-          items.forEach(item => {
-            subtotal += item.price;
-            cartContainer.innerHTML += `
-              <div class="cart-item-card">
-                <img src="${item.image}" alt="${item.name}">
-                <div class="cart-item-details">
-                  <h4>${item.name}</h4>
-                  <p class="cart-item-price">${item.price.toFixed(2)}</p>
-                </div>
-              </div>
-            `;
-          });
-
-          // Update the price summary UI
-          document.getElementById("cart-subtotal").innerText = subtotal.toFixed(2);
-          document.getElementById("cart-total").innerText = subtotal.toFixed(2);
-          
-        } else {
-          cartContainer.innerHTML = `<p class="empty-cart-msg">Your cart is completely empty.</p>`;
-        }
-      } catch (error) {
-        console.error("Error loading cart from database: ", error);
-        cartContainer.innerHTML = `<p class="empty-cart-msg">Error loading your secure cart.</p>`;
-      }
-    } else {
-      cartContainer.innerHTML = `<p class="empty-cart-msg">Please <a href="login.html">log in</a> to view your cart.</p>`;
-    }
-  });
-}
