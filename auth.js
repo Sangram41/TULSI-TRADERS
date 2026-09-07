@@ -470,29 +470,39 @@ if (checkoutBtn) {
       });
 
       const data = await response.json();
+if (response.ok) {
+        const options = {
+            "key": "rzp_test_TZDUKoDeiDIslM", // Double-check your Key ID here!
+            "amount": data.amount,
+            "currency": "INR",
+            "name": "Tulsi Traders",
+            "description": "Organic Produce Purchase",
+            "order_id": data.orderId,
+            
+            // STRICT PREFILL CONFIGURATION
+            "prefill": {
+              "name": "Valued Customer",
+                "email": "tulsitraders@example.com",
+                "contact": "+919876543210"
+            },
+            
+            // Forces notes so Razorpay registers prefilled data cleanly
+            "notes": {
+                "address": "Pune, Maharashtra"
+            },
 
-      if (response.ok) {
-     const options = {
-    "key": "rzp_test_TZDUKoDeiDIslM", 
-    "amount": data.amount,
-    "currency": "INR",
-    "name": "Tulsi Traders",
-    "description": "Organic Produce",
-    "order_id": data.orderId,
-    "prefill": {
-        "email": auth.currentUser ? auth.currentUser.email : "",
-        "contact": "9999999999"  
-    },
-    "handler": async function (response) {
-        alert("Payment Successful! ID: " + response.razorpay_payment_id);
-        const cartRef = doc(db, "carts", currentUserUID);
-        await updateDoc(cartRef, { items: [] });
-        window.location.reload();
-    },
-    "theme": { "color": "#0B5C46" }
-};
+            "handler": async function (response) {
+                alert("Payment Successful! ID: " + response.razorpay_payment_id);
+                const cartRef = doc(db, "carts", currentUserUID);
+                await updateDoc(cartRef, { items: [] });
+                window.location.reload();
+            },
+            "theme": { 
+                "color": "#0B5C46" 
+            }
+        };
+        
         const rzp = new window.Razorpay(options);
-        console.log("Razorpay options:", options);
         rzp.open();
         checkoutBtn.innerText = "Proceed to Checkout";
       } else {

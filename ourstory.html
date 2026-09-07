@@ -1,112 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="yellow.css?v=2">
-    <title>TULSI TRADERS</title>
-</head>
-<body class="about-page">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Tulsi Traders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 
     <!-- Navbar -->
     <div class="navbar">
         <div class="container flex">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
-            <a href="TULSI1.html" >
-        <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
-    </a>
+            <a href="TULSI1.html">
+                <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
+            </a>
             <nav>
                 <ul>
                     <li><a href="shop.html">SHOP</a></li>
                     <li><a href="progress.html">CONTACT US</a></li>
                     <li><a href="about.html">OUR STORY</a></li>
-                    <li><a href="shop.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
+                    <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
                     <li id="login-nav-item">
-                    <a href="login.html" class="nav-btn">
-                    <i class="fa-solid fa-right-to-bracket fa-bounce"></i> LOGIN</a>
+                        <a href="login.html" class="nav-btn"><i class="fa-solid fa-circle-user"></i> LOGIN</a>
                     </li>
                     <li id="logout-nav-item" style="display: none;">
-                    <a href="#" id="logout-btn" class="nav-btn">
-                    <i class="fa-solid fa-right-to-bracket fa-bounce"></i> <span id="user-email-display">EMAIL</span> | LOGOUT
-                    </a>
+                        <a href="#" id="logout-btn" class="nav-btn"><i class="fa-solid fa-circle-user"></i> <span id="user-email-display">EMAIL</span> | LOGOUT</a>
                     </li>
                 </ul>
             </nav>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="about-hero">
-        <div class="about-hero-media">
-            <img src="https://cdn.pixabay.com/photo/2024/09/20/01/37/spice-market-9060102_1280.jpg" alt="Tulsi Traders Spice and Dry Fruit Market">
+
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">Tulsi Traders</div>
+      <nav class="nav-links">
+        <a href="#">Shop</a>
+        <a href="#">Our Farm</a>
+        <a href="#" class="active">About</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="nav-icons">
+        <a href="#" aria-label="Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </a>
+        <a href="#" aria-label="User Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Cultivating Freshness,<br>Rooted in Tradition.</h1>
+      <p>Since 1982, we've nurtured the soil to bring you the purest harvest.</p>
+    </div>
+  </section>
+
+  <main class="story-container">
+    
+    <div class="story-grid-top">
+      <div class="story-card text-card">
+        <h2>A Legacy in Every Seed</h2>
+        <p>Our journey began with a single handful of heirloom seeds and a profound respect for the earth. Decades later, Tulsi Traders remains a family-led cooperative dedicated to organic purity.</p>
+        <p>We believe that true luxury lies in uncompromised quality. By resisting industrial shortcuts and honoring seasonal rhythms, we ensure that every vegetable, grain, and herb retains its natural vitality. Our fields are a testament to patience, yielding produce that is vibrant, nutrient-dense, and deeply flavorful.</p>
+      </div>
+      <div class="story-card image-card">
+        <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb1626f?auto=format&fit=crop&w=800&q=80" alt="Hands holding organic seeds">
+      </div>
+    </div>
+
+    <div class="story-grid-bottom">
+      <div class="stats-card">
+        <div class="stat-item">
+          <span class="stat-number">40+</span>
+          <span class="stat-label">Years of Heritage</span>
         </div>
-        <div class="about-hero-content">
-            <span class="about-kicker">Since 1982</span>
-            <h2>A Tradition of Purity, <em>Flavor & Devotion.</em></h2>
-            <p>Bringing authentic wholesale and retail dry fruits, spices, and sacred essentials to your home.</p>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Certified Organic</span>
         </div>
-    </section>
+      </div>
+      <div class="story-card image-card-wide">
+        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80" alt="Irrigation on an organic farm field">
+      </div>
+    </div>
 
-    <!-- Main Content Wrapper -->
-    <main class="main-content">
-        
-        <!-- Legacy Section -->
-        <section class="legacy-section">
-            <div class="container">
-                <div class="legacy-intro">
-                    <span class="section-kicker">Our Heritage</span>
-                    <h3>Our Story & Craft</h3>
-                </div>
-                <div class="legacy-grid">
-                    <div class="legacy-copy">
-                        <p class="legacy-lede">Our journey began in 1982 with a humble spice stall and a vision to bring authentic, uncompromised flavors and sacred essentials into every household.</p>
-                        <p>For over four decades, Tulsi Traders has grown into a trusted name for both wholesale partners and retail families alike. We hand-select the finest dry fruits, aromatic spices, and traditional pickles from native origins, ensuring that every batch meets the highest standards of freshness and rich heritage.</p>
-                        <p>Beyond our kitchen staples, we take profound care in curating our sacred collection—sourcing pure, natural honey and devotional essentials like premium agarbatti and authentic attar. Every single aspect, from sorting crisp almonds and fragrant cardamoms to packaging soothing ritual fragrances, is handled with meticulous attention to detail, preserving their natural oils, purity, and spiritual resonance.</p>
-                        
-                        <div class="legacy-stats">
-                            <div class="legacy-stat">
-                                <h4>40<span>+</span></h4>
-                                <p>Years of Legacy</p>
-                            </div>
-                            <div class="legacy-stat">
-                                <h4>100<span>%</span></h4>
-                                <p>Pure & Authentic</p>
-                            </div>
-                        </div>
-                    </div>
+  </main>
 
-                    <div class="legacy-media">
-                        <div class="legacy-media-main">
-                            <!-- Replace with your specific shop/product image -->
-                            <img src="https://cdn.pixabay.com/photo/2024/09/20/01/37/spice-market-9060102_1280.jpg" alt="Spices and dry fruits collection">
-                        </div>
-                        <div class="legacy-media-secondary">
-                            <!-- Replace with your specific honey/prayer essentials image -->
-                            <img src="https://cdn.pixabay.com/photo/2024/09/20/14/25/ai-generated-9061583_1280.png" alt="Honey jars and prayer essentials">
-                        </div>
-                        <div class="legacy-media-chip">
-                            <i class="fa-solid fa-shop"></i>
-                            <div>
-                                <strong>Wholesale & Retail</strong>
-                                <span>Trusted Quality</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <section class="team-section">
+    <div class="team-header">
+      <h2>Meet the Stewards</h2>
+      <p>The dedicated hands and passionate hearts behind our daily harvest.</p>
+    </div>
 
-        <!-- Pull Quote Section -->
-        <section class="quote-section">
-            <div class="container">
-                <div class="quote-mark"><i class="fa-solid fa-quote-left"></i></div>
-                <p class="quote-text">"Every spice tells a story of origin, and every ritual fragrance brings peace to the soul. We curate them with uncompromising devotion."</p>
-                <span class="quote-author">Tulsi Traders Philosophy</span>
-            </div>
-        </section>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Elena Rossi">
+        </div>
+        <h3>Elena Rossi</h3>
+        <p class="role">Head Agronomist</p>
+      </div><div class="team-member">
+        <div class="member-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Marcus Vance">
+        </div>
+        <h3>Marcus Vance</h3>
+        <p class="role">Soil Health Specialist</p>
+      </div>
 
-    </main>
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Sarah Lin">
+        </div>
+        <h3>Sarah Lin</h3>
+        <p class="role">Seed Cultivation</p>
+      </div>
+
+      <div class="team-member">
+        <div class="member-photo">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="David Oakes">
+        </div>
+        <h3>David Oakes</h3>
+        <p class="role">Harvest Manager</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">Tulsi Traders</div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Wholesale</a></li>
+      </ul>
+      <p class="copyright">&copy; 2024 Tulsi Traders. Cultivating Freshness.</p>
+    </div>
+  </footer>
 
 </body>
 </html>
