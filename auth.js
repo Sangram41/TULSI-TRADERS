@@ -346,3 +346,163 @@ document.addEventListener("click", async (event) => {
     }
   }
 });
+
+
+// === PHASE 9 & 10: DYNAMIC CART, MATH & RAZORPAY CHECKOUT ===
+const cartContainer = document.getElementById("cart-items-container");
+const checkoutBtn = document.querySelector(".checkout-btn"); 
+
+// This holds the cart data globally so the checkout button can access it
+let currentCartItems = []; 
+
+if (cartContainer) {
+  // 1. Fetch Cart from Database on Page Load
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        const cartRef = doc(db, "carts", user.uid);
+        const cartSnap = await getDoc(cartRef);
+        
+        if (cartSnap.exists() && cartSnap.data().items.length > 0) {
+          currentCartItems = cartSnap.data().items;
+          renderCart(currentCartItems);
+        } else {
+          showEmptyCart();
+        }
+      } catch (error) {
+        cartContainer.innerHTML = `<p class="empty-cart-msg">Error loading cart.</p>`;
+      }
+    } else {
+      cartContainer.innerHTML = `<p class="empty-cart-msg">Please <a href="login.html">log in</a>.</p>`;
+    }
+  });
+
+  // 2. The Engine: Injects HTML and perfectly calculates the Bill
+  function renderCart(itemsArray) {
+    cartContainer.innerHTML = "";
+    let subtotal = 0;
+
+    itemsArray.forEach((item, index) => {
+      const itemQuantity = item.quantity || 1;
+      const itemTotal = item.price * itemQuantity;
+      subtotal += itemTotal;
+
+      // Notice we are forcing the ₹ symbol on all items here
+      cartContainer.innerHTML += `
+        <div class="cart-item" data-index="${index}">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <span class="cart-item-price">₹${item.price.toFixed(2)}</span>
+            </div>
+            <div class="cart-item-qty">
+                <button class="qty-btn minus-btn">−</button>
+                <span class="qty-value">${itemQuantity}</span>
+                <button class="qty-btn plus-btn">+</button>
+            </div>
+            <div class="cart-item-total">₹${itemTotal.toFixed(2)}</div>
+            <button class="remove-btn" aria-label="Remove"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      `;
+    });
+
+    const formattedSubtotal = "₹" + subtotal.toFixed(2);
+    document.getElementById("cart-subtotal").innerText = formattedSubtotal;
+    document.getElementById("cart-total").innerText = formattedSubtotal;
+  }
+
+  // 3. Helper to clear the screen
+  function showEmptyCart() {
+    cartContainer.innerHTML = `<p class="empty-cart-msg">Your cart is empty.</p>`;
+    document.getElementById("cart-subtotal").innerText = "₹0.00";
+    document.getElementById("cart-total").innerText = "₹0.00";
+    currentCartItems = [];
+  }
+
+  // 4. Handle Fast +, -, and x clicks
+  cartContainer.addEventListener("click", async (event) => {
+    if (!currentUserUID) return;
+
+    const cartItemEl = event.target.closest(".cart-item");
+    if (!cartItemEl) return; 
+
+    const index = parseInt(cartItemEl.getAttribute("data-index"));
+    const cartRef = doc(db, "carts", currentUserUID);
+    let needsUpdate = false;
+
+    if (event.target.closest(".remove-btn")) {
+      currentCartItems.splice(index, 1);
+      needsUpdate = true;
+    } else if (event.target.closest(".plus-btn")) {
+      currentCartItems[index].quantity = (currentCartItems[index].quantity || 1) + 1;
+      needsUpdate = true;
+    } else if (event.target.closest(".minus-btn")) {
+      if (currentCartItems[index].quantity > 1) {
+        currentCartItems[index].quantity -= 1;
+        needsUpdate = true;
+      }
+    }
+
+    if (needsUpdate) {
+      if (currentCartItems.length === 0) showEmptyCart();
+      else renderCart(currentCartItems);
+      
+      await updateDoc(cartRef, { items: currentCartItems });
+    }
+  });
+}
+
+// 5. Razorpay Checkout Connection (Now cleanly separated!)
+if (checkoutBtn) {
+  checkoutBtn.addEventListener("click", async () => {
+    if (!currentUserUID || currentCartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    checkoutBtn.innerText = "Processing..."; 
+
+    try {
+      const response = await fetch("http://localhost:3000/create-razorpay-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: currentCartItems }) 
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+     const options = {
+    "key": "rzp_test_TZDUKoDeiDIslM", 
+    "amount": data.amount,
+    "currency": "INR",
+    "name": "Tulsi Traders",
+    "description": "Organic Produce",
+    "order_id": data.orderId,
+    "prefill": {
+        "email": auth.currentUser ? auth.currentUser.email : "",
+        "contact": "9999999999"  
+    },
+    "handler": async function (response) {
+        alert("Payment Successful! ID: " + response.razorpay_payment_id);
+        const cartRef = doc(db, "carts", currentUserUID);
+        await updateDoc(cartRef, { items: [] });
+        window.location.reload();
+    },
+    "theme": { "color": "#0B5C46" }
+};
+        const rzp = new window.Razorpay(options);
+        console.log("Razorpay options:", options);
+        rzp.open();
+        checkoutBtn.innerText = "Proceed to Checkout";
+      } else {
+        alert("Error: " + data.error);
+        checkoutBtn.innerText = "Proceed to Checkout";
+      }
+    } catch (error) {
+      console.error("Checkout Error:", error);
+      alert("Cannot connect to Node.js backend. Is your server.js running?");
+      checkoutBtn.innerText = "Proceed to Checkout";
+    }
+  });
+}

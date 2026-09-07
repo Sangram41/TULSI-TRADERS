@@ -8,27 +8,25 @@
     <title>CART - Tulsi Traders</title>
 </head>
 <body>
-     <div class="navbar">
+    
+    <!-- Navbar -->
+    <div class="navbar">
         <div class="container flex">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
-            <a href="TULSI1.html" >
-        <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
-    </a>
+            <a href="TULSI1.html">
+                <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
+            </a>
             <nav>
                 <ul>
                     <li><a href="shop.html">SHOP</a></li>
                     <li><a href="progress.html">CONTACT US</a></li>
                     <li><a href="about.html">OUR STORY</a></li>
-                 <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
+                    <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
                     <li id="login-nav-item">
-                    <a href="login.html" class="nav-btn">
-                    <i class="fa-solid fa-right-to-bracket fa-bounce"></i></i> LOGIN</a>
+                        <a href="login.html" class="nav-btn"><i class="fa-solid fa-circle-user"></i> LOGIN</a>
+                    </li>
                     <li id="logout-nav-item" style="display: none;">
-                    <a href="#" id="logout-btn" class="nav-btn">
-                    <i class="fa-solid fa-right-to-bracket fa-bounce"></i></i> <span id="user-email-display">EMAIL</span> | LOGOUT
-                    </a>
-                    </li>
-                    </li>
+                        <a href="#" id="logout-btn" class="nav-btn"><i class="fa-solid fa-circle-user"></i> <span id="user-email-display">EMAIL</span> | LOGOUT</a>
                     </li>
                 </ul>
             </nav>
@@ -38,35 +36,29 @@
     <!-- Cart Layout -->
     <section class="cart-page">
         <div class="container cart-layout">
-           <div class="cart-item">
-    <img src="https://cdn.pixabay.com/photo/2015/10/01/20/23/cashew-nuts-967650_1280.jpg" alt="Organic Cashew" class="cart-item-img">
-    <div class="cart-item-info">
-        <h4>Organic Cashew</h4>
-        <span class="cart-item-price">4.99 <span class="unit">/ea</span></span>
-    </div>
-    <div class="cart-item-qty">
-        <button class="qty-btn">−</button>
-        <span class="qty-value">1</span>
-        <button class="qty-btn">+</button>
-    </div>
-    <div class="cart-item-total">4.99</div>
-    <button class="remove-btn" aria-label="Remove item"><i class="fa-solid fa-xmark"></i></button>
-</div>
 
+            <!-- Dynamic Cart Items -->
+            <div class="cart-items">
+                <h2>Your Harvest</h2>
+                <div id="cart-items-container">
+                    <p class="empty-cart-msg">Loading your secure cart...</p>
+                </div>
+            </div>
+<!-- Order Summary -->
             <div class="cart-summary">
                 <h3>Order Summary</h3>
                 <div class="summary-row">
                     <span>Subtotal</span>
-                    <span id="cart-subtotal">$0.00</span>
+                    <span id="cart-subtotal">₹0.00</span> 
                 </div>
                 <div class="summary-row">
                     <span>Shipping</span>
-                    <span>Calculated at checkout</span>
+                    <span>Calculated at checkout </span>
                 </div>
                 <hr class="divider">
                 <div class="summary-row total">
                     <span>Total</span>
-                    <span id="cart-total">$0.00</span>
+                    <span id="cart-total">₹0.00</span>
                 </div>
                 <button class="checkout-btn">Proceed to Checkout</button>
             </div>
@@ -74,21 +66,22 @@
         </div>
     </section>
 
-<footer class="site-footer">
-    <div class="container flex footer-layout">
-        <div class="footer-brand">
-            <h2>Tulsi Traders</h2>
-            <p>Cultivating Freshness.</p>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container flex footer-layout">
+            <div class="footer-brand">
+                <h2>Tulsi Traders</h2>
+                <p>Cultivating Freshness.</p>
+            </div>
+            <div class="footer-links flex">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Shipping Info</a>
+                <a href="#">Wholesale</a>
+            </div>
         </div>
-        <div class="footer-links flex">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Shipping Info</a>
-            <a href="#">Wholesale</a>
-        </div>
-    </div>
-</footer>
-    
+    </footer>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script type="module" src="auth.js"></script>
 </body>
 </html>
