@@ -1330,6 +1330,7 @@ SPLIT-SCREEN LOGIN PAGE STYLES
 .empty-cart-msg { color: #666; font-style: italic; }
 
 
+
 @media (max-width: 768px) {
     /* === SPLIT SCREEN (LOGIN PAGE) === */
     .split-screen {
