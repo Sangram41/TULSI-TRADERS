@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="yellow.css?v=2">
-    <title>SHOP - Tulsi Traders</title>
+    <link rel="stylesheet" href="yellow.css?v=3">
+    <title>Shop &mdash; Tulsi Traders</title>
 </head>
 <body>
-
-    <!-- Navbar -->
+ 
     <div class="navbar">
         <div class="container flex">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
@@ -18,10 +20,10 @@
             </a>
             <nav>
                 <ul>
-                    <li><a href="shop.html">SHOP</a></li>
-                    <li><a href="/home/sangram/TULSI-TRADERS/progess.html">CONTACT US</a></li>
-                    <li><a href="/home/sangram/TULSI-TRADERS/progess.html">OUR STORY</a></li>
-                   <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
+                    <li><a href="shop.html" class="nav-active">SHOP</a></li>
+                    <li><a href="progress.html">CONTACT US</a></li>
+                    <li><a href="about.html">OUR STORY</a></li>
+                    <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
                     <li id="login-nav-item">
                         <a href="login.html" class="nav-btn">
                             <i class="fa-solid fa-right-to-bracket fa-bounce"></i> LOGIN
@@ -36,45 +38,33 @@
             </nav>
         </div>
     </div>
-
-    <!-- Shop Hero -->
+ 
     <section class="shop-hero">
         <div class="container">
-            <span class="overline">Full Harvest</span>
+            <span class="overline">Full Harvest &middot; Page 1 of 4</span>
             <h2>Everything we're picking this week.</h2>
-            <p>Sourced from local growers, sold at the peak of freshness. Filter by category to find exactly what you need.</p>
+            <p>Sourced from local growers and trusted suppliers, sold at the peak of freshness. Filter by category to find exactly what you need.</p>
         </div>
     </section>
-
-    <!-- Shop Body -->
-
+ 
     <section class="shop-body">
         <div class="container shop-layout">
-
-            <!-- Filter Sidebar -->
+ 
             <aside class="shop-filters">
                 <h4>Category</h4>
                 <ul class="filter-list">
-                    <li><a href="#" class="filter-pill active">All Produce</a></li>
-                    <li><a href="#" class="filter-pill">Vegetables</a></li>
-                    <li><a href="#" class="filter-pill">Fruits</a></li>
-                    <li><a href="#" class="filter-pill">Spices &amp; Herbs</a></li>
-                    <li><a href="#" class="filter-pill">Nuts &amp; Seeds</a></li>
-                    <li><a href="#" class="filter-pill">Grains &amp; Pulses</a></li>
-                </ul>
-
-                <h4>Availability</h4>
-                <ul class="filter-list">
-                    <li><a href="#" class="filter-pill">In Stock</a></li>
-                    <li><a href="#" class="filter-pill">Low Stock</a></li>
+                    <li><a href="shop.html" class="filter-pill active">All Products</a></li>
+                    <li><a href="pooja.html" class="filter-pill">Pooja Essentials</a></li>
+                    <li><a href="spicesandherbs.html" class="filter-pill">Spices &amp; Herbs</a></li>
+                    <li><a href="nutsandseeds.html" class="filter-pill">Nuts &amp; Seeds</a></li>
+                    <li><a href="dryfruits.html" class="filter-pill">Grains, Dried Fruit &amp; More</a></li>
                 </ul>
             </aside>
-
-            <!-- Product Grid -->
+ 
             <div class="shop-main">
-
+ 
                 <div class="shop-toolbar">
-                    <p class="result-count">24 items</p>
+                    <p class="result-count">25 items &middot; showing page 1</p>
                     <div class="sort-control">
                         <label for="sort">Sort by</label>
                         <select id="sort" name="sort">
@@ -85,166 +75,109 @@
                         </select>
                     </div>
                 </div>
-
+ 
                 <div class="shop-grid">
-
-          <div class="shop-card">
-    <div class="card-image">
-        <span class="badge-organic">Organic</span>
-        <img src="https://cdn.pixabay.com/photo/2015/10/01/20/23/cashew-nuts-967650_1280.jpg" alt="Cashew">
-    </div>
-    <div class="card-content">
-        <h3>Organic Cashew</h3>
-        <p>Creamy, rich texture perfect for spreading or slicing.</p>
-        <div class="card-footer">
-            <span class="price">4.99 <span class="unit">/ea</span></span>
-            <!-- === NEW ADD TO CART BUTTON === -->
-            <button class="add-to-cart-btn" 
-                data-id="prod_cashew01" 
-                data-name="Organic Cashew" 
-                data-price="4.99" 
-                data-image="https://cdn.pixabay.com/photo/2015/10/01/20/23/cashew-nuts-967650_1280.jpg">
-                Add to Cart
-            </button>
-        </div>
-    </div>
-</div>
-
-                    <a href="#" class="shop-card">
+                    <a href="#cashew" class="shop-card" id="cashew">
+                        <div class="card-image">
+                            <span class="badge-organic">Organic</span>
+                            <img src="https://cdn.pixabay.com/photo/2015/10/01/20/23/cashew-nuts-967650_1280.jpg" alt="Organic Cashew" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>Organic Cashew</h3>
+                            <p>Creamy, rich texture perfect for snacking or cooking.</p>
+                            <div class="card-footer">
+                                <span class="price">&#8377;4.99 <span class="unit">/ea</span></span>
+                                <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
+                            </div>
+                        </div>
+                    </a>
+ 
+                    <a href="#almonds" class="shop-card" id="almonds">
                         <div class="card-image">
                             <span class="badge-local">Local</span>
-                            <img src="https://cdn.pixabay.com/photo/2013/02/20/11/30/almond-83766_1280.jpg" alt="Almonds">
+                            <img src="https://cdn.pixabay.com/photo/2013/02/20/11/30/almond-83766_1280.jpg" alt="Almonds" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h3>Almonds</h3>
-                            <p>A vibrant mix of sweet, tangy, and earthy flavors.</p>
+                            <p>Crisp, sweet kernels sourced from trusted local growers.</p>
                             <div class="card-footer">
-                                <span class="price">6.50 <span class="unit">/lb</span></span>
+                                <span class="price">&#8377;6.50 <span class="unit">/lb</span></span>
                                 <span class="stock low-stock">Low Stock</span>
                             </div>
                         </div>
                     </a>
-
-                    <a href="#" class="shop-card">
+ 
+                    <a href="#turmeric" class="shop-card" id="turmeric">
                         <div class="card-image">
                             <span class="badge-signature">Signature</span>
-                            <img src="https://cdn.pixabay.com/photo/2018/03/22/19/21/turmeric-3251560_1280.jpg" alt="Turmeric">
+                            <img src="https://cdn.pixabay.com/photo/2018/03/22/19/21/turmeric-3251560_1280.jpg" alt="100% Natural Turmeric" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h3>100% Natural Turmeric</h3>
-                            <p>Aromatic, peppery, and deeply refreshing.</p>
+                            <p>Aromatic, peppery, and deeply earthy in flavour.</p>
                             <div class="card-footer">
-                                <span class="price">3.99 <span class="unit">/bunch</span></span>
+                                <span class="price">&#8377;3.99 <span class="unit">/bunch</span></span>
                                 <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
                             </div>
                         </div>
                     </a>
-
-                    <a href="#" class="shop-card">
+ 
+                    <a href="#agarbatti" class="shop-card" id="agarbatti">
                         <div class="card-image">
                             <span class="badge-organic">Organic</span>
-                            <img src="https://imgs.search.brave.com/w9xRzxFx6TqvZfH73SOTbwSuOTs-v1c-m_5Rv2s6Kp0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jeWNs/ZS5pbi9jZG4vc2hv/cC9maWxlcy9MaWEt/Xy1GbHV0ZS5qcGc_/dj0xNzg3NTUyOTE1/JndpZHRoPTI0MA" alt="Fresh vegetables">
+                            <img src="https://imgs.search.brave.com/w9xRzxFx6TqvZfH73SOTbwSuOTs-v1c-m_5Rv2s6Kp0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jeWNs/ZS5pbi9jZG4vc2hv/cC9maWxlcy9MaWEt/Xy1GbHV0ZS5qcGc_/dj0xNzg3NTUyOTE1/JndpZHRoPTI0MA" alt="Agarbatti" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h3>Agarbatti</h3>
-                            <p>A hand-picked mix of the season's best vegetables.</p>
+                            <p>Hand-rolled incense sticks for daily prayer and pooja.</p>
                             <div class="card-footer">
-                                <span class="price">12.00 <span class="unit">/box</span></span>
+                                <span class="price">&#8377;12.00 <span class="unit">/box</span></span>
                                 <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
                             </div>
                         </div>
                     </a>
-
-                    <a href="#" class="shop-card">
+ 
+                    <a href="#honey" class="shop-card" id="honey">
                         <div class="card-image">
                             <span class="badge-local">Local</span>
-                            <img src="https://cdn.pixabay.com/photo/2015/10/26/11/10/merry-christmas-1006972_1280.jpg" alt="Plums">
+                            <img src="https://cdn.pixabay.com/photo/2015/10/26/11/10/merry-christmas-1006972_1280.jpg" alt="Honey" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h3>Honey</h3>
-                            <p>Sweet and juicy, picked at the height of ripeness.</p>
+                            <p>Golden and unfiltered, harvested at the height of the season.</p>
                             <div class="card-footer">
-                                <span class="price">5.25 <span class="unit">/lb</span></span>
+                                <span class="price">&#8377;5.25 <span class="unit">/lb</span></span>
                                 <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
                             </div>
                         </div>
                     </a>
-
-                    <a href="#" class="shop-card">
+ 
+                    <a href="#gangajal" class="shop-card" id="gangajal">
                         <div class="card-image">
                             <span class="badge-signature">Signature</span>
-                            <img src="https://imgs.search.brave.com/viDFodE-zG6kw2T6cDH3qK_woIRE58O-5PJuRqy1mwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFWVUFDKzZha0wu/anBn" alt="Spice blend">
+                            <img src="https://imgs.search.brave.com/viDFodE-zG6kw2T6cDH3qK_woIRE58O-5PJuRqy1mwY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NzFWVUFDKzZha0wu/anBn" alt="Ganga Jal" loading="lazy">
                         </div>
                         <div class="card-content">
                             <h3>Ganga Jal</h3>
-                            <p>Our namesake mix of hand-ground everyday spices.</p>
+                            <p>Sacred water for daily worship and ritual ceremonies.</p>
                             <div class="card-footer">
-                                <span class="price">7.75 <span class="unit">/jar</span></span>
+                                <span class="price">&#8377;7.75 <span class="unit">/jar</span></span>
                                 <span class="stock low-stock">Low Stock</span>
                             </div>
                         </div>
                     </a>
-
-                    <a href="#" class="shop-card">
-                        <div class="card-image">
-                            <span class="badge-organic">Organic</span>
-                            <img src="https://imgs.search.brave.com/uVhyQURkMsEEoReILfobX7cQ0EPNLJoBMzptMpJUe3U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAyLzgzLzEwLzYz/LzM2MF9GXzI4MzEw/NjM0N19IT054ekdF/OUR3NWF6eEdzNUhJ/MUdJcHdHS0loeXNn/Ni5qcGc" alt="Lentils">
-                        </div>
-                        <div class="card-content">
-                            <h3>Black raisins</h3>
-                            <p>Slow-grown pulses, rich in protein and flavor.</p>
-                            <div class="card-footer">
-                                <span class="price">2.90 <span class="unit">/lb</span></span>
-                                <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#" class="shop-card">
-                        <div class="card-image">
-                            <span class="badge-local">Local</span>
-                            <img src="https://imgs.search.brave.com/9jzTUr2-wRECG7LS8Oay-XI17NEI-hKDcJoxQAZyCMU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbHVz/LnVuc3BsYXNoLmNv/bS9wcmVtaXVtX3Bo/b3RvLTE3MjYwNzI0/MDA0MjYtYTMyNTFi/NDlkMTk0P2ZtPWpw/ZyZxPTYwJnc9MzAw/MCZhdXRvPWZvcm1h/dCZmaXQ9Y3JvcCZp/eGxpYj1yYi00LjEu/MCZpeGlkPU0zd3hN/akEzZkRCOE1IeHpa/V0Z5WTJoOE1UZDhm/SEJwYzNSaFkyaHBi/M3hsYm53d2ZId3dm/SHg4TUE9PQ" alt="Pista">
-                        </div>
-                        <div class="card-content">
-                            <h3>Pista</h3>
-                            <p>Bright, zesty citrus grown pesticide-free.</p>
-                            <div class="card-footer">
-                                <span class="price">3.20 <span class="unit">/lb</span></span>
-                                <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#" class="shop-card">
-                        <div class="card-image">
-                            <span class="badge-organic">Organic</span>
-                            <img src="https://imgs.search.brave.com/lJDWM8DA2xZGZbJGF5ZGAbCvU47hWfxzk0R5W9zZ5U0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE2/Njk0NDQ2OTk3Mjkt/ZjU1ZjdjZjlmODJi/P2ZtPWpwZyZxPTYw/Jnc9MzAwMCZhdXRv/PWZvcm1hdCZmaXQ9/Y3JvcCZpeGxpYj1y/Yi00LjEuMCZpeGlk/PU0zd3hNakEzZkRC/OE1IeHpaV0Z5WTJo/OE5YeDhZWFIwWVhK/OFpXNThNSHg4TUh4/OGZEQT0" alt="Tomatoes">
-                        </div>
-                        <div class="card-content">
-                            <h3>Attar</h3>
-                            <p>Sun-ripened and picked the same morning.</p>
-                            <div class="card-footer">
-                                <span class="price">4.10 <span class="unit">/lb</span></span>
-                                <span class="stock in-stock"><i class="fa-solid fa-circle"></i> In Stock</span>
-                            </div>
-                        </div>
-                    </a>
-
                 </div>
-
-<div class="shop-pagination">
-    <a href="#" class="page-btn active">1</a>
-    <a href="#" class="page-btn">2</a>
-    <a href="#" class="page-btn">3</a>
-    <a href="#" class="page-btn">4</a>
-    <a href="#" class="page-btn">5</a>
-    <a href="#" class="page-btn page-next">Next <i class="fa-solid fa-arrow-right"></i></a>
-</div>
+ 
+                <div class="shop-pagination">
+                    <a href="shop1.html" class="page-btn active">1</a>
+                    <a href="shop2.html" class="page-btn">2</a>
+                    <a href="shop3.html" class="page-btn">3</a>
+                    <a href="shop2.html" class="page-btn page-next">Next <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
+ 
     <footer class="site-footer">
         <div class="container flex footer-layout">
             <div class="footer-brand">
@@ -259,8 +192,7 @@
             </div>
         </div>
     </footer>
-
+ 
     <script type="module" src="auth.js"></script>
 </body>
 </html>
- 
