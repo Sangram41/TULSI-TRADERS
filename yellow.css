@@ -1636,49 +1636,6 @@ SPLIT-SCREEN LOGIN PAGE STYLES
     font-weight: 700;
 }
 
-/* ==========================================================================
-   Responsive Media Queries
-   ========================================================================== */
-@media (max-width: 992px) {
-    .legacy-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .legacy-media {
-        height: 400px;
-    }
-    
-    .about-hero h2 {
-        font-size: 2.4rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar nav {
-        display: none; /* Can be handled via your mobile menu toggle script */
-    }
-    
-    #menu-icon {
-        display: block;
-    }
-    
-    .about-hero {
-        height: 50vh;
-    }
-    
-    .about-hero h2 {
-        font-size: 2rem;
-    }
-    
-    .legacy-media-chip {
-        right: 0;
-    }
-    
-    .legacy-stats {
-        flex-direction: column;
-        gap: 20px;
-    }
 @media (max-width: 768px) {
     /* === GLOBAL & NAVBAR === */
     .navbar {
