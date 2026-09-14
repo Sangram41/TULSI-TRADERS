@@ -1,20 +1,17 @@
-
 const express = require("express");
 const path = require("path");
+const Razorpay = require("razorpay");
+const cors = require("cors"); // (If you are using cors)
+require("dotenv").config();   // (If you are using dotenv)
+
 const app = express();
 
-// This single line replaces your Python server entirely
+// Serve the frontend files (replaces Python server)
 app.use(express.static(path.join(__dirname, "../")));
 
 app.use(express.json());
-// ... your existing Razorpay routes remain here
-const express = require('express');
-const cors = require('cors');
-const Razorpay = require('razorpay');
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+// ... the rest of your Razorpay logic follows ...
 
 // 1. Paste your ACTUAL keys inside the quotes below
 const razorpay = new Razorpay({
