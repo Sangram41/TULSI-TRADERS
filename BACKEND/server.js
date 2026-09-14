@@ -1,3 +1,13 @@
+
+const express = require("express");
+const path = require("path");
+const app = express();
+
+// This single line replaces your Python server entirely
+app.use(express.static(path.join(__dirname, "../")));
+
+app.use(express.json());
+// ... your existing Razorpay routes remain here
 const express = require('express');
 const cors = require('cors');
 const Razorpay = require('razorpay');
