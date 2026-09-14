@@ -14,7 +14,10 @@ const firebaseConfig = {
   appId: "1:677454540523:web:04293e179692b3b0c0d8ae",
   measurementId: "G-KEBM4M16ZJ"
 };
-
+let globalUser = null;
+auth.onAuthStateChanged((user) => {
+    globalUser = user;
+});
 // 3. Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
@@ -289,7 +292,7 @@ if (navbarEl) {
     navbarEl.classList.toggle("scrolled", window.scrollY > 50);
   });
 }// === PHASE 8: SMART ADD TO CART ===
-
+const user = globalUser || auth.currentUser;
 document.addEventListener("click", async (event) => {
   
   // 1. Check if the clicked element is our new smart button (or the icon inside it)
