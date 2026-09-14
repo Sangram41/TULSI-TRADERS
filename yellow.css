@@ -1542,7 +1542,56 @@ a { text-decoration: none; }
     .newsletter-btn { padding: 12px; }
     .gallery-grid { grid-template-columns: repeat(3, 1fr); }
     .section-heading h2 { font-size: 26px; }
+/* === PHILOSOPHY MOBILE FIX === */
+    .philosophy {
+        padding: 50px 20px !important;
+    }
 
+    .grid-2-col {
+        display: flex !important;
+        flex-direction: column !important; /* Stacks image on top, text on bottom */
+        gap: 40px !important;
+    }
+
+    .philosophy-image {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .philosophy-image img {
+        margin: 0 !important; /* Kills the 300px left margin */
+        width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
+
+    .philosophy-text {
+        padding: 0 !important; /* Kills the desktop right-padding */
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    .philosophy-text h2 {
+        font-size: 32px !important; /* Scales title for mobile */
+    }
+
+    /* Fixes the floating card so it doesn't fly off screen */
+    .floating-card {
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        left: auto !important;
+        margin: -40px auto 0 !important; /* Centers it and overlaps the image */
+        width: 85% !important;
+        max-width: 300px !important;
+        z-index: 10 !important;
+    }
+
+    .stats-row {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
     /* Product preview */
     .preview-header { flex-direction: column; align-items: flex-start; gap: 15px; }
     .preview-grid { grid-template-columns: 1fr; }
