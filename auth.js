@@ -14,10 +14,7 @@ const firebaseConfig = {
   appId: "1:677454540523:web:04293e179692b3b0c0d8ae",
   measurementId: "G-KEBM4M16ZJ"
 };
-let globalUser = null;
-auth.onAuthStateChanged((user) => {
-    globalUser = user;
-});
+
 // 3. Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
@@ -292,7 +289,6 @@ if (navbarEl) {
     navbarEl.classList.toggle("scrolled", window.scrollY > 50);
   });
 }// === PHASE 8: SMART ADD TO CART ===
-const user = globalUser || auth.currentUser;
 document.addEventListener("click", async (event) => {
   
   // 1. Check if the clicked element is our new smart button (or the icon inside it)
@@ -453,9 +449,7 @@ if (cartContainer) {
       await updateDoc(cartRef, { items: currentCartItems });
     }
   });
-}
-
-// 5. Razorpay Checkout Connection (Now cleanly separated!)
+}// 5. Razorpay Checkout Connection (with a self-healing button)
 if (checkoutBtn) {
   checkoutBtn.addEventListener("click", async () => {
     if (!currentUserUID || currentCartItems.length === 0) {
@@ -463,58 +457,67 @@ if (checkoutBtn) {
       return;
     }
 
-    checkoutBtn.innerText = "Processing..."; 
+    checkoutBtn.disabled = true;
+    checkoutBtn.innerText = "Processing...";
 
     try {
       const response = await fetch("http://localhost:3000/create-razorpay-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: currentCartItems }) 
+        body: JSON.stringify({ items: currentCartItems })
       });
 
       const data = await response.json();
-if (response.ok) {
-        const options = {
-            "key": "rzp_test_TZDUKoDeiDIslM", // Double-check your Key ID here!
-            "amount": data.amount,
-            "currency": "INR",
-            "name": "Tulsi Traders",
-            "description": "Organic Produce Purchase",
-            "order_id": data.orderId,
-            
-            // STRICT PREFILL CONFIGURATION
-            "prefill": {
-              "name": "Valued Customer",
-                "email": "tulsitraders@example.com",
-                "contact": "+919876543210"
-            },
-            
-            // Forces notes so Razorpay registers prefilled data cleanly
-            "notes": {
-                "address": "Pune, Maharashtra"
-            },
 
-            "handler": async function (response) {
-                alert("Payment Successful! ID: " + response.razorpay_payment_id);
-                const cartRef = doc(db, "carts", currentUserUID);
-                await updateDoc(cartRef, { items: [] });
-                window.location.reload();
-            },
-            "theme": { 
-                "color": "#0B5C46" 
-            }
-        };
-        
-        const rzp = new window.Razorpay(options);
-        rzp.open();
-        checkoutBtn.innerText = "Proceed to Checkout";
-      } else {
-        alert("Error: " + data.error);
-        checkoutBtn.innerText = "Proceed to Checkout";
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create order.");
       }
+
+      const options = {
+        "key": "rzp_test_TZDUKoDeiDIslM",
+        "amount": data.amount,
+        "currency": "INR",
+        "name": "Tulsi Traders",
+        "description": "Organic Produce",
+        "order_id": data.orderId,
+        "prefill": {
+          "email": auth.currentUser ? auth.currentUser.email : "",
+          "contact": "9999999999"
+        },
+        "handler": async function (response) {
+          alert("Payment Successful! ID: " + response.razorpay_payment_id);
+          const cartRef = doc(db, "carts", currentUserUID);
+          await updateDoc(cartRef, { items: [] });
+          window.location.reload();
+        },
+        "modal": {
+          // Fires if the user closes the popup without paying —
+          // WITHOUT this, the button stays stuck on "Processing..." forever
+          "ondismiss": function () {
+            checkoutBtn.disabled = false;
+            checkoutBtn.innerText = "Proceed to Checkout";
+          }
+        },
+        "theme": { "color": "#0B5C46" }
+      };
+
+      const rzp = new window.Razorpay(options);
+
+      // Fires on a declined/failed payment — resets the button instead of hanging
+      rzp.on("payment.failed", function (response) {
+        alert("Payment failed: " + response.error.description);
+        checkoutBtn.disabled = false;
+        checkoutBtn.innerText = "Proceed to Checkout";
+      });
+
+      rzp.open();
+      checkoutBtn.disabled = false;
+      checkoutBtn.innerText = "Proceed to Checkout";
+
     } catch (error) {
       console.error("Checkout Error:", error);
       alert("Cannot connect to Node.js backend. Is your server.js running?");
+      checkoutBtn.disabled = false;
       checkoutBtn.innerText = "Proceed to Checkout";
     }
   });
