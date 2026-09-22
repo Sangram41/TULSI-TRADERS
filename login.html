@@ -113,7 +113,20 @@
             </div>
         </div>
     </div>
-<script type="module" src="auth.js"></script>
+<script type="module" src="auth.js"></script><script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuIcon = document.getElementById("menu-icon");
+        const navMenu = document.querySelector(".navbar ul");
+        
+        if (menuIcon && navMenu) {
+            menuIcon.addEventListener("click", function() {
+                navMenu.classList.toggle("active");
+            });
+        } else {
+            console.error("Menu Icon or Nav Menu not found by JavaScript!");
+        }
+    });
+</script>
 </form>
 </body>
 </html>
