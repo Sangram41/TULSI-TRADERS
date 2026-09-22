@@ -1678,7 +1678,16 @@ em { font-style: italic; font-weight: 400; }
     .navbar { height: 60px; padding: 0 15px; }
     .navbar .flex { position: relative; flex-direction: row; justify-content: center; align-items: center; height: 100%; }
     .logo { font-size: 20px !important; white-space: nowrap; padding: 0 !important; margin: 0; }
-    #menu-icon { display: block; position: absolute; left: 15px; font-size: 24px; color: #0B5C46; cursor: pointer; }
+    #menu-icon {
+    display: block !important;
+    position: absolute; /* Ensures it floats above the layout */
+    left: 15px;
+    top: 15px; /* Add this if it's too high/low */
+    font-size: 26px;
+    color: #0B5C46;
+    cursor: pointer;
+    z-index: 10001; /* Forces it to the very front layer */
+}
 
     .navbar ul {
         position: fixed;
