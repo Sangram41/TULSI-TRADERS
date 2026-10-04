@@ -42,7 +42,7 @@ if (logoutBtn) {
     event.preventDefault(); 
     signOut(auth).then(() => {
       showToast("You have been safely logged out.", "success");
-      window.location.href = "TULSI1.html"; 
+      window.location.href = "index.html"; 
     }).catch((error) => {
       alert("Error logging out: " + error.message);
     });
@@ -59,7 +59,7 @@ if (signupForm) {
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then((userCredential) => {
         showToast("Account created successfully! Welcome to Tulsi Traders.", "success");
-        window.location.href = "TULSI1.html";
+        window.location.href = "index.html";
       })
       .catch((error) => {
         showToast("Oops! " + error.message, "error");
@@ -77,7 +77,7 @@ if (loginForm) {
     signInWithEmailAndPassword(auth, userEmail, userPassword)
       .then((userCredential) => {
         showToast("Welcome back to Tulsi Traders!", "success");
-        window.location.href = "TULSI1.html";
+        window.location.href = "index.html";
       })
       .catch((error) => {
         showToast("Login failed! Please check your email and password.", "error");
@@ -94,7 +94,7 @@ if (googleBtn) {
       .then((result) => {
         const user = result.user;
         showToast("Welcome, " + user.displayName + "!", "success");
-        window.location.href = "TULSI1.html"; 
+        window.location.href = "index.html"; 
       })
       .catch((error) => {
         showToast("Google sign-in failed. Check console for details.", "error");
@@ -111,7 +111,7 @@ if (githubBtn) {
       .then((result) => {
         const user = result.user;
         showToast("Welcome, " + user.displayName + "!", "success");
-        window.location.href = "TULSI1.html"; 
+        window.location.href = "index.html"; 
       })
       .catch((error) => {
         showToast("GitHub sign-in failed. " + error.message, "error");
