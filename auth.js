@@ -502,4 +502,30 @@ window.showToast = function(message, type = "success") {
     setTimeout(() => {
         toast.remove();
     }, 4000);
-};
+};// ==========================================
+// GLOBAL MOBILE MENU LOGIC
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const menuIcon = document.getElementById("menu-icon");
+    const navMenu = document.querySelector(".navbar ul");
+
+    // Removes duplicate click listeners and toggles the menu cleanly
+    if (menuIcon && navMenu) {
+        // Clone and replace the icon to wipe any old, stuck event listeners
+        const newMenuIcon = menuIcon.cloneNode(true);
+        menuIcon.parentNode.replaceChild(newMenuIcon, menuIcon);
+        
+        newMenuIcon.addEventListener("click", function(e) {
+            e.preventDefault(); 
+            e.stopPropagation(); // Stops the click from registering twice
+            navMenu.classList.toggle("active");
+        });
+
+        // Optional: Close the menu automatically if the user clicks outside of it
+        document.addEventListener("click", (e) => {
+            if (navMenu.classList.contains("active") && !navMenu.contains(e.target) && e.target !== newMenuIcon) {
+                navMenu.classList.remove("active");
+            }
+        });
+    }
+});

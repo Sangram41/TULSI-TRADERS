@@ -2233,3 +2233,10 @@ em { font-style: italic; font-weight: 400; }
     font-size: 15px;
     color: #444;
 }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Absolutely prevents horizontal side-scrolling on mobile */
+    width: 100%;
+}
