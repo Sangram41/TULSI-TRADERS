@@ -12,8 +12,7 @@
     <title>Contact Us &mdash; Tulsi Traders</title>
 </head>
 <body>
-
-    <!-- Navbar -->
+ <!-- Navbar -->
     <div class="navbar">
         <div class="container flex">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
@@ -22,9 +21,10 @@
             </a>
             <nav>
                 <ul>
+                    <li><a href="community.html">COMMUNITY</a></li>
                     <li><a href="shop.html">SHOP</a></li>
-                    <li><a href="contact.html" class="nav-active">CONTACT US</a></li>
-                    <li><a href="about.html">OUR STORY</a></li>
+                    <li><a href="contactus.html">CONTACT US</a></li>
+                    <li><a href="ourstory.html">OUR STORY</a></li>
                     <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
                     <li id="login-nav-item">
                         <a href="login.html" class="nav-btn">
@@ -39,60 +39,76 @@
                 </ul>
             </nav>
         </div>
+    </div><!-- Contact Hero -->
+<section class="contact-hero">
+    <div class="container">
+        <span class="section-kicker">We're here to help</span>
+        <h1>Get in Touch</h1>
+        <p>Whether you have a question about our harvest, wholesale orders, or your college project requirements, our team is ready to assist you.</p>
     </div>
+</section>
 
-    <!-- Contact Hero -->
-    <section class="contact-hero">
-        <div class="container">
-            <span class="section-kicker">We're here to help</span>
-            <h1>Get in Touch</h1>
-            <p>Whether you have a question about our harvest, wholesale orders, or your college project requirements, our team is ready to assist you.</p>
-        </div>
-    </section>
-
-    <!-- Contact Content -->
-    <section class="contact-section">
-        <div class="container contact-grid">
-            
-            <!-- Left Side: Info -->
-            <div class="contact-info">
-                <h2>Drop us a line</h2>
-                <p class="contact-lede">We love hearing from our community. Reach out directly or visit our local distribution center.</p>
-                
-                <ul class="info-list">
-                    <li>
-                        <i class="fa-solid fa-location-dot"></i>
-                        <div>
-                            <strong>Visit Us</strong>
-                            <span>FC Road, Deccan Gymkhana<br>Pune, Maharashtra 411004</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-phone"></i>
-                        <div>
-                            <strong>Call Us</strong>
-                            <span>+91 98765 43210</span>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-envelope"></i>
-                        <div>
-                            <strong>Email Us</strong>
-                            <span>support@tulsitraders.com</span>
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="working-hours">
-                    <h3>Operating Hours</h3>
-                    <p><strong>Monday - Saturday:</strong> 8:00 AM - 7:00 PM</p>
-                    <p><strong>Sunday:</strong> Closed for harvest</p>
-                </div>
+<!-- Interactive Map & Cards Section -->
+<section class="contact-cards-section">
+    <div class="container contact-cards-grid">
+        
+        <!-- Card 1: Map/Location -->
+        <div class="contact-card location-card">
+            <div class="map-placeholder"></div>
+            <div class="card-content">
+                <h3><i class="fa-solid fa-location-dot"></i> Visit Us</h3>
+                <p>FC Road, Deccan Gymkhana<br>Pune, Maharashtra 411004</p>
+                <a href="https://maps.google.com" target="_blank" class="directions-link">Get Directions &rarr;</a>
             </div>
+        </div>
 
-            <!-- Right Side: Form -->
-            <div class="contact-form-container">
-                <form class="contact-form">
+        <!-- Card 2: Contact Details -->
+        <div class="contact-card details-card">
+            <h3><i class="fa-solid fa-address-book"></i> Direct Lines</h3>
+            
+            <div class="contact-item">
+                <strong>Customer Support</strong>
+                <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
+            </div>
+            
+            <div class="contact-item">
+                <strong>General Inquiries</strong>
+                <a href="mailto:support@tulsitraders.com"><i class="fa-solid fa-envelope"></i> support@tulsitraders.com</a>
+            </div>
+        </div>
+
+        <!-- Card 3: Hours -->
+        <div class="contact-card hours-card">
+            <h3><i class="fa-solid fa-clock"></i> Operating Hours</h3>
+            
+            <div class="hours-row">
+                <span>Mon - Fri</span>
+                <span class="hours-time">8:00 AM - 7:00 PM</span>
+            </div>
+            <div class="hours-row">
+                <span>Saturday</span>
+                <span class="hours-time">9:00 AM - 5:00 PM</span>
+            </div>
+            <div class="hours-row no-border">
+                <span>Sunday</span>
+                <span class="closed-text">Closed for harvest</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Main Contact Form & FAQ -->
+<section class="contact-main-section">
+    <div class="container contact-main-grid">
+        
+        <!-- Left Side: Form -->
+        <div class="contact-form-container">
+            <h2>Send a Message</h2>
+            <p class="form-subtitle">We typically reply within 24 hours.</p>
+            
+            <form class="contact-form">
+                <div class="form-row">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" placeholder="John Doe" required>
@@ -102,32 +118,52 @@
                         <label for="email">Email Address</label>
                         <input type="email" id="email" placeholder="john@example.com" required>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <select id="subject" required>
-                            <option value="">Select a topic...</option>
-                            <option value="order">Order Inquiry</option>
-                            <option value="wholesale">Wholesale / Bulk Order</option>
-                            <option value="feedback">General Feedback</option>
-                        </select>
-                    </div>
+                <div class="form-group margin-top">
+                    <label for="subject">Subject</label>
+                    <select id="subject" required>
+                        <option value="">Select a topic...</option>
+                        <option value="order">Order Inquiry</option>
+                        <option value="wholesale">Wholesale / Bulk Order</option>
+                        <option value="feedback">General Feedback</option>
+                    </select>
+                </div>
 
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" rows="5" placeholder="How can we help you?" required></textarea>
-                    </div>
+                <div class="form-group margin-top">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" placeholder="How can we help you?" required></textarea>
+                </div>
 
-                    <button type="submit" class="contact-submit-btn">
-                        Send Message <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
-
+                <button type="submit" class="contact-submit-btn">
+                    Send Message <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
         </div>
-    </section>
 
-    <!-- Footer -->
+        <!-- Right Side: FAQ -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <h4><i class="fa-solid fa-circle-question"></i> Do you offer same-day delivery?</h4>
+                <p>Currently, we offer next-day delivery for all orders placed before 4:00 PM within Pune city limits.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4><i class="fa-solid fa-circle-question"></i> Where do you source your spices?</h4>
+                <p>We work directly with certified organic farmers across Maharashtra and Kerala, ensuring fair trade practices and the highest quality produce.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4><i class="fa-solid fa-circle-question"></i> Can I change my order after placing it?</h4>
+                <p>Orders can be modified within 2 hours of placement. Please call our support line directly for immediate assistance.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+    <!-- === FOOTER === -->
     <footer class="site-footer">
         <div class="container flex footer-layout">
             <div class="footer-brand">
@@ -142,6 +178,7 @@
             </div>
         </div>
     </footer>
+
 
     <script type="module" src="auth.js"><script>
     document.addEventListener("DOMContentLoaded", function() {

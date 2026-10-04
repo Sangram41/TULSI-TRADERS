@@ -2,39 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- FontAwesome for the icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="yellow.css?v=2">
+    <link rel="stylesheet" href="yellow.css?v=2">
     <title>SIGN UP - Tulsi Traders</title>
 </head>
 <body class="login-body">
- <!-- Navbar -->
+
+    <!-- Navbar -->
     <div class="navbar">
         <div class="container flex">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
-            <a href="TULSI1.html" >
-        <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
-    </a>
+            <a href="TULSI1.html">
+                <h1 class="logo"><i class="fa-solid fa-shop"></i> TULSI TRADERS</h1>
+            </a>
             <nav>
                 <ul>
+                    <li><a href="community.html">COMMUNITY</a></li>
                     <li><a href="shop.html">SHOP</a></li>
                     <li><a href="contactus.html">CONTACT US</a></li>
                     <li><a href="ourstory.html">OUR STORY</a></li>
                     <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
-                    <li>
-                    <!-- Check that id="login-nav-item" is right here inside the <li> tag -->
                     <li id="login-nav-item">
-                    <a href="login.html" class="nav-btn">
-                    <i class="fa-solid fa-circle-user"></i> LOGIN</a>
-                    <!-- Check that id="logout-nav-item" is right here inside this <li> tag -->
+                        <a href="login.html" class="nav-btn">
+                            <i class="fa-solid fa-right-to-bracket fa-bounce"></i> LOGIN
+                        </a>
+                    </li>
                     <li id="logout-nav-item" style="display: none;">
-                    <a href="#" id="logout-btn" class="nav-btn">
-                    <i class="fa-solid fa-circle-user"></i> <span id="user-email-display">EMAIL</span> | LOGOUT
-                </a>
-</li>
-</li>
-</li>
+                        <a href="#" id="logout-btn" class="nav-btn">
+                            <i class="fa-solid fa-right-to-bracket fa-bounce"></i> <span id="user-email-display">EMAIL</span> | LOGOUT
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -53,7 +52,7 @@
         <div class="right-pane">
             <div class="form-wrapper">
                 
-                <!-- Tabs (Now functioning as links) -->
+                <!-- Tabs -->
                 <div class="form-tabs">
                     <a href="login1.html" class="tab">Login</a>
                     <a href="login.html" class="tab active">Sign Up</a>
@@ -61,13 +60,12 @@
                 
                 <!-- Form Header -->
                 <div class="form-header">
-                         <form id="signup-form">
                     <h2>Create an Account</h2>
                     <p>Join our organic marketplace today.</p>
                 </div>
 
                 <!-- Main Form -->
-                <form>
+                <form id="signup-form">
                     <!-- Name Input -->
                     <div class="input-group">
                         <label for="name">FULL NAME</label>
@@ -106,27 +104,29 @@
 
                 <!-- Social Buttons -->
                 <div class="social-logins">
-                   <button type="button" id="google-btn" class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
-                  <button type="button" id="github-btn" class="social-btn"><i class="fa-brands fa-github"></i> GitHub</button>
+                    <button type="button" id="google-btn" class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
+                    <button type="button" id="github-btn" class="social-btn"><i class="fa-brands fa-github"></i> GitHub</button>
                 </div>
 
             </div>
         </div>
     </div>
-<script type="module" src="auth.js"></script><script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const menuIcon = document.getElementById("menu-icon");
-        const navMenu = document.querySelector(".navbar ul");
-        
-        if (menuIcon && navMenu) {
-            menuIcon.addEventListener("click", function() {
-                navMenu.classList.toggle("active");
-            });
-        } else {
-            console.error("Menu Icon or Nav Menu not found by JavaScript!");
-        }
-    });
-</script>
-</form>
+
+    <!-- Scripts -->
+    <script type="module" src="auth.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuIcon = document.getElementById("menu-icon");
+            const navMenu = document.querySelector(".navbar ul");
+            
+            if (menuIcon && navMenu) {
+                menuIcon.addEventListener("click", function() {
+                    navMenu.classList.toggle("active");
+                });
+            } else {
+                console.error("Menu Icon or Nav Menu not found by JavaScript!");
+            }
+        });
+    </script>
 </body>
 </html>

@@ -9,7 +9,8 @@
 </head>
 <body>
     
-    <!-- Navbar -->
+  
+   <!-- Navbar -->
     <div class="navbar">
         <div class="container flex">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
@@ -18,15 +19,20 @@
             </a>
             <nav>
                 <ul>
+                    <li><a href="community.html">COMMUNITY</a></li>
                     <li><a href="shop.html">SHOP</a></li>
-                    <li><a href="progress.html">CONTACT US</a></li>
-                    <li><a href="about.html">OUR STORY</a></li>
+                    <li><a href="contactus.html">CONTACT US</a></li>
+                    <li><a href="ourstory.html">OUR STORY</a></li>
                     <li><a href="cart.html" class="nav-btn2"><i class="fa-solid fa-cart-shopping fa-flip"></i> CART</a></li>
                     <li id="login-nav-item">
-                        <a href="login.html" class="nav-btn"><i class="fa-solid fa-circle-user"></i> LOGIN</a>
+                        <a href="login.html" class="nav-btn">
+                            <i class="fa-solid fa-right-to-bracket fa-bounce"></i> LOGIN
+                        </a>
                     </li>
                     <li id="logout-nav-item" style="display: none;">
-                        <a href="#" id="logout-btn" class="nav-btn"><i class="fa-solid fa-circle-user"></i> <span id="user-email-display">EMAIL</span> | LOGOUT</a>
+                        <a href="#" id="logout-btn" class="nav-btn">
+                            <i class="fa-solid fa-right-to-bracket fa-bounce"></i> <span id="user-email-display">EMAIL</span> | LOGOUT
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -60,13 +66,24 @@
                     <span>Total</span>
                     <span id="cart-total">₹0.00</span>
                 </div>
-                <button class="checkout-btn">Proceed to Checkout</button>
-            </div>
+                <!-- === DYNAMIC UPI QR SECTION === -->
+<div id="qr-payment-section" style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #cae4c5;">
+    <p style="font-weight: 600; color: #0B5C46; margin-bottom: 10px;">Scan to Pay via UPI</p>
+    
+    <!-- Wrapping the image in a link so mobile users can tap it to open GPay/PhonePe -->
+    <a id="upi-link" href="#" target="_blank" style="display: none; text-decoration: none;">
+        <img id="upi-qr-code" src="" alt="UPI Payment QR Code" style="width: 180px; height: 180px; margin: 0 auto; border: 3px solid #0B5C46; border-radius: 12px; padding: 10px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <p id="qr-instruction" style="font-size: 14px; color: #555; margin-top: 12px; font-weight: bold;"></p>
+        <p style="font-size: 12px; color: #6a9c78; margin-top: 5px;">(Tap QR if viewing on mobile)</p>
+    </a>
+    
+    <p id="qr-empty-msg" style="font-size: 13px; color: #888;">Add items to your cart to generate a payment code.</p>
+</div>
 
         </div>
     </section>
 
-    <!-- Footer -->
+      <!-- === FOOTER === -->
     <footer class="site-footer">
         <div class="container flex footer-layout">
             <div class="footer-brand">
@@ -81,6 +98,7 @@
             </div>
         </div>
     </footer>
+
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script type="module" src="auth.js"></script><script>
     document.addEventListener("DOMContentLoaded", function() {

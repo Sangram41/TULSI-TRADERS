@@ -18,6 +18,7 @@
             </a>
             <nav>
                 <ul>
+                    <li><a href="community.html">COMMUNITY</a></li>
                     <li><a href="shop.html">SHOP</a></li>
                     <li><a href="contactus.html">CONTACT US</a></li>
                     <li><a href="ourstory.html">OUR STORY</a></li>
@@ -128,25 +129,21 @@
             <h2>Shop by Category</h2>
         </div>
         <div class="category-grid">
-            <a href="shop.html" class="category-item">
+            <a href="pooja.html" class="category-item">
                 <div class="category-icon"><i class="fa-solid fa-carrot"></i></div>
-                <span>Vegetables</span>
+                <span>Pooja Essentials</span>
             </a>
-            <a href="shop.html" class="category-item">
+            <a href="spicesandherbs.html" class="category-item">
                 <div class="category-icon"><i class="fa-solid fa-apple-whole"></i></div>
-                <span>Fruits</span>
+                <span>Spice & herbs</span>
             </a>
-            <a href="shop.html" class="category-item">
-                <div class="category-icon"><i class="fa-solid fa-leaf"></i></div>
-                <span>Herbs</span>
-            </a>
-            <a href="shop.html" class="category-item">
+                <a href="nutsandseeds.html" class="category-item">
                 <div class="category-icon"><i class="fa-solid fa-seedling"></i></div>
                 <span>Nuts & Seeds</span>
             </a>
-            <a href="shop.html" class="category-item">
-                <div class="category-icon"><i class="fa-solid fa-jar"></i></div>
-                <span>Pantry</span>
+            <a href="dryfruits.html" class="category-item">
+                <div class="category-icon"><i class="fa-solid fa-leaf"></i></div>
+                <span>Dry Fruits</span>
             </a>
         </div>
     </div>
@@ -187,50 +184,20 @@
         </div>
     </div>
 </section>
-    <!-- === TESTIMONIALS === -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-heading">
-                <span class="overline">Customer Love</span>
-                <h2>What our community is saying.</h2>
-            </div>
-
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p>"The freshest produce I've had delivered in years. You can genuinely taste the difference from store-bought."</p>
-                    <div class="testimonial-author">
-                        <strong>Ananya R.</strong>
-                        <span>Pune</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p>"Their turmeric and spice blends have completely changed how I cook. Packaging is beautiful too."</p>
-                    <div class="testimonial-author">
-                        <strong>Rohit M.</strong>
-                        <span>Mumbai</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <p>"Reliable, fast, and the almonds are unbelievably fresh. My whole family orders from Tulsi now."</p>
-                    <div class="testimonial-author">
-                        <strong>Sanya K.</strong>
-                        <span>Bengaluru</span>
-                    </div>
-                </div>
-            </div>
+<!-- === TESTIMONIALS === -->
+<section class="testimonials" style="padding: 80px 0; background-color: #fcfcf9;">
+    <div class="container">
+        <div class="section-heading" style="text-align: center; margin-bottom: 40px;">
+            <span class="overline">Customer Love</span>
+            <h2>What our community is saying.</h2>
         </div>
-    </section>
+        
+        <!-- The Top 3 Comments Grid -->
+        <div id="top-3-comments" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto;">
+            <!-- auth.js will automatically inject the top 3 cards here -->
+        </div>
+    </div>
+</section>
 
 
 
@@ -280,18 +247,6 @@
     </footer>
 
     <script type="module" src="auth.js"></script><script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const menuIcon = document.getElementById("menu-icon");
-        const navMenu = document.querySelector(".navbar ul");
-        
-        if (menuIcon && navMenu) {
-            menuIcon.addEventListener("click", function() {
-                navMenu.classList.toggle("active");
-            });
-        } else {
-            console.error("Menu Icon or Nav Menu not found by JavaScript!");
-        }
-    });
 </script>
 </body>
 </html>

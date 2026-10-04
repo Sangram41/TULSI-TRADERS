@@ -1,10 +1,8 @@
-// 1. Import Firebase tools directly from Google's servers
+// 1. IMPORT FIREBASE
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-// === NEW FIRESTORE IMPORTS ===
-import { getFirestore, doc, setDoc, getDoc, arrayUnion, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, setDoc, getDoc, arrayUnion, arrayRemove, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+// 2. CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyBi3NuEGxFg9prR-EHmKuAIs_a4pCEzKcE",
   authDomain: "tulsi-traders-482a5.firebaseapp.com",
@@ -15,199 +13,35 @@ const firebaseConfig = {
   measurementId: "G-KEBM4M16ZJ"
 };
 
-// 3. Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
-// === INITIALIZE FIRESTORE ===
 export const db = getFirestore(app);
-console.log("Firebase & Firestore are successfully connected!");
- 
 
-// PHASE 3: SIGN UP NEW USERS
-
-// 1. Tell JavaScript to find the form we just named
-const signupForm = document.getElementById("signup-form");
-
-// 2. Check if we are actually on the Sign Up page
-if (signupForm) {
-  
-  // 3. Listen for the moment the user clicks the "Sign Up" button
-  signupForm.addEventListener("submit", function(event) {
-    
-    // Stop the page from refreshing!
-    event.preventDefault(); 
-
-    // Grab the exact text the user typed into the boxes
-    const userEmail = document.getElementById("email").value;
-    const userPassword = document.getElementById("password").value;
-
-    // 4. Send that text to Firebase to create the account
-    createUserWithEmailAndPassword(auth, userEmail, userPassword)
-      .then((userCredential) => {
-        // IF SUCCESSFUL:
-        alert("Account created successfully! Welcome to Tulsi Traders.");
-        window.location.href = "TULSI1.html"; // Send them back to the home page!
-      })
-      .catch((error) => {
-        // IF SOMETHING GOES WRONG:
-        // (For example, the password is too short, or the email is already used)
-        alert("Oops! " + error.message);
-      });
-
-  });
-}
-
-
-// PHASE 4: LOG IN EXISTING USERS
-
-
-// 1. Tell JavaScript to find the Login form
-const loginForm = document.getElementById("login-form");
-
-// 2. Check if we are actually on the Login page
-if (loginForm) {
-  
-  // 3. Listen for the moment the user clicks "Sign In"
-  loginForm.addEventListener("submit", function(event) {
-    
-    // Stop the page from refreshing!
-    event.preventDefault(); 
-
-    // Grab the email and password they typed
-    const userEmail = document.getElementById("email").value;
-    const userPassword = document.getElementById("password").value;
-
-    // 4. Send it to Firebase to verify their identity
-    signInWithEmailAndPassword(auth, userEmail, userPassword)
-      .then((userCredential) => {
-        // IF SUCCESSFUL (The email and password match the database!):
-        alert("Welcome back to Tulsi Traders!");
-        window.location.href = "TULSI1.html"; // Send them to the home page
-      })
-      .catch((error) => {
-        // IF SOMETHING GOES WRONG (Wrong password or email doesn't exist):
-        alert("Login failed! Please check your email and password.");
-      });
-
-  });
-}
-
-// PHASE 5: GOOGLE LOGIN
-
-// 1. Find the Google button on the page
-const googleBtn = document.getElementById("google-btn");
-
-// 2. Set up the official Google ID Badge
-const provider = new GoogleAuthProvider();
-
-// 3. Check if the Google button actually exists on the screen
-if (googleBtn) {
-  
-  // 4. Listen for the click
-  googleBtn.addEventListener("click", function() {
-    
-    // Tell the waiter to open the secure Google window
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // IF SUCCESSFUL: 
-        // We can actually grab their Google name to say hello!
-        const user = result.user;
-        alert("Welcome, " + user.displayName + "!");
-        window.location.href = "TULSI1.html"; // Send them to the homepage
-      })
-      .catch((error) => {
-        // IF SOMETHING GOES WRONG (They closed the pop-up early, etc.)
-        alert("Google sign-in was cancelled or failed.");
-      });
-
-  });
-}
-
-// PHASE 6: GITHUB LOGIN
-
-// 1. Find the GitHub button
-const githubBtn = document.getElementById("github-btn");
-
-// 2. Set up the official GitHub ID Badge
-const githubProvider = new GithubAuthProvider();
-
-// 3. Check if the GitHub button is on the screen
-if (githubBtn) {
-  
-  // 4. Listen for the click
-  githubBtn.addEventListener("click", function() {
-    
-    // Open the secure GitHub window
-    signInWithPopup(auth, githubProvider)
-      .then((result) => {
-        // IF SUCCESSFUL:
-        const user = result.user;
-        alert("Welcome, " + user.displayName + "!");
-        window.location.href = "TULSI1.html"; 
-      })
-      .catch((error) => {
-        // IF SOMETHING GOES WRONG:
-        alert("GitHub sign-in failed. " + error.message);
-      });
-
-  });
-}
-
-
-// Add this line at the top of PHASE 7
-export let currentUserUID = null; 
+// 3. WATCH AUTH STATE
+export let currentUserUID = null;
+const loginNavItem = document.getElementById("login-nav-item");
+const logoutNavItem = document.getElementById("logout-nav-item");
+const logoutBtn = document.getElementById("logout-btn"); 
+const userEmailDisplay = document.getElementById("user-email-display");
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    currentUserUID = user.uid; // Store the ID for the cart to use!
-    
+    currentUserUID = user.uid;
     if (loginNavItem) loginNavItem.style.display = "none";
     if (logoutNavItem) logoutNavItem.style.display = "block";
     if (userEmailDisplay) userEmailDisplay.innerText = user.email;
   } else {
-    currentUserUID = null; // Clear it when they log out
-    
+    currentUserUID = null;
     if (loginNavItem) loginNavItem.style.display = "block";
     if (logoutNavItem) logoutNavItem.style.display = "none";
   }
 });
-
-// PHASE 7: WATCH AUTH STATE & LOGOUT
-
-// 1. Find the navbar items
-const loginNavItem = document.getElementById("login-nav-item");
-const logoutNavItem = document.getElementById("logout-nav-item");
-const logoutBtn = document.getElementById("logout-btn"); // <--- I ADDED THIS BACK IN!
-const userEmailDisplay = document.getElementById("user-email-display");
-
-// 2. The "Security Camera" that constantly watches the user's status
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // THE USER IS LOGGED IN!
-    if (loginNavItem) loginNavItem.style.display = "none";
-    if (logoutNavItem) logoutNavItem.style.display = "block";
-    
-    // Inject their email into the navbar!
-    if (userEmailDisplay) {
-        userEmailDisplay.innerText = user.email;
-    }
-
-  } else {
-    // THE USER IS LOGGED OUT!
-    if (loginNavItem) loginNavItem.style.display = "block";
-    if (logoutNavItem) logoutNavItem.style.display = "none";
-  }
-});
-
-// 3. Make the Logout button actually work
 
 if (logoutBtn) {
   logoutBtn.addEventListener("click", function(event) {
     event.preventDefault(); 
-    
     signOut(auth).then(() => {
-      alert("You have been safely logged out.");
+      showToast("You have been safely logged out.", "success");
       window.location.href = "TULSI1.html"; 
     }).catch((error) => {
       alert("Error logging out: " + error.message);
@@ -215,111 +49,93 @@ if (logoutBtn) {
   });
 }
 
-// MOBILE MENU TOGGLE
-
-const menuIcon = document.getElementById("menu-icon");
-const navMenu = document.querySelector(".navbar ul");
-
-if (menuIcon && navMenu) {
-  menuIcon.addEventListener("click", function() {
-    // This adds or removes the "active" class to trigger the CSS slide animation
-    navMenu.classList.toggle("active");
+// 4. SIGN UP
+const signupForm = document.getElementById("signup-form");
+if (signupForm) {
+  signupForm.addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    const userEmail = document.getElementById("email").value;
+    const userPassword = document.getElementById("password").value;
+    createUserWithEmailAndPassword(auth, userEmail, userPassword)
+      .then((userCredential) => {
+        showToast("Account created successfully! Welcome to Tulsi Traders.", "success");
+        window.location.href = "TULSI1.html";
+      })
+      .catch((error) => {
+        showToast("Oops! " + error.message, "error");
+      });
   });
 }
 
-// SCROLL REVEAL — PHILOSOPHY SECTION
-
-const revealTargets = document.querySelectorAll(".philosophy-image, .philosophy-text");
-
-if (revealTargets.length) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  revealTargets.forEach(el => observer.observe(el));
-}
-
-// STAT COUNTER (Philosophy section)
-const statNumbers = document.querySelectorAll(".stat h3");
-
-if (statNumbers.length) {
-  const statObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const finalText = el.textContent.trim(); // e.g. "100%" or "Zero"
-        const numMatch = finalText.match(/\d+/);
-
-        if (numMatch) {
-          const target = parseInt(numMatch[0]);
-          const suffix = finalText.replace(numMatch[0], "");
-          let current = 0;
-          const step = Math.ceil(target / 40);
-
-          const tick = () => {
-            current += step;
-            if (current >= target) {
-              el.textContent = target + suffix;
-            } else {
-              el.textContent = current + suffix;
-              requestAnimationFrame(tick);
-            }
-          };
-          tick();
-        }
-        statObserver.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  statNumbers.forEach(el => statObserver.observe(el));
-}
-
-// SHRINK NAVBAR ON SCROLL
-
-const navbarEl = document.querySelector(".navbar");
-
-if (navbarEl) {
-  window.addEventListener("scroll", () => {
-    navbarEl.classList.toggle("scrolled", window.scrollY > 50);
+// 5. SIGN IN
+const loginForm = document.getElementById("login-form");
+if (loginForm) {
+  loginForm.addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    const userEmail = document.getElementById("email").value;
+    const userPassword = document.getElementById("password").value;
+    signInWithEmailAndPassword(auth, userEmail, userPassword)
+      .then((userCredential) => {
+        showToast("Welcome back to Tulsi Traders!", "success");
+        window.location.href = "TULSI1.html";
+      })
+      .catch((error) => {
+        showToast("Login failed! Please check your email and password.", "error");
+      });
   });
-}// === PHASE 8: SMART ADD TO CART ===
+}
+
+// 6. GOOGLE LOGIN
+const googleBtn = document.getElementById("google-btn");
+const provider = new GoogleAuthProvider();
+if (googleBtn) {
+  googleBtn.addEventListener("click", function() {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        showToast("Welcome, " + user.displayName + "!", "success");
+        window.location.href = "TULSI1.html"; 
+      })
+      .catch((error) => {
+        showToast("Google sign-in failed. Check console for details.", "error");
+      });
+  });
+}
+
+// 7. GITHUB LOGIN
+const githubBtn = document.getElementById("github-btn");
+const githubProvider = new GithubAuthProvider();
+if (githubBtn) {
+  githubBtn.addEventListener("click", function() {
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const user = result.user;
+        showToast("Welcome, " + user.displayName + "!", "success");
+        window.location.href = "TULSI1.html"; 
+      })
+      .catch((error) => {
+        showToast("GitHub sign-in failed. " + error.message, "error");
+      });
+  });
+}
+
+// 8. SMART ADD TO CART
 document.addEventListener("click", async (event) => {
-  
-  // 1. Check if the clicked element is our new smart button (or the icon inside it)
   const button = event.target.closest(".smart-add-to-cart-btn");
-  
   if (button) {
     event.preventDefault(); 
-
     if (!currentUserUID) {
-      alert("Please log in to add items to your cart!");
+      showToast("Please log in to add items to your cart!", "error");
       window.location.href = "login.html";
       return;
     }
-
-    // 2. Look "up" the HTML tree to find the specific product card wrapper
     const productCard = button.closest(".shop-card");
-
-    // 3. Scrape the specific data from this card's HTML
-    // We use .innerText and .src to grab what is visible on the screen
     const rawName = productCard.querySelector("h3").innerText;
-    
-    // We grab the price text (e.g., "4.99 /ea") and strip out everything except numbers and decimals
     const rawPriceText = productCard.querySelector(".price").innerText;
     const cleanPrice = parseFloat(rawPriceText.replace(/[^0-9.]/g, '')); 
-    
     const rawImage = productCard.querySelector("img").src;
-
-    // Create a unique ID by removing spaces and making the name lowercase
     const generatedId = "prod_" + rawName.replace(/\s+/g, '').toLowerCase();
 
-    // 4. Build the data object
     const productData = {
       id: generatedId,
       name: rawName,
@@ -328,40 +144,31 @@ document.addEventListener("click", async (event) => {
       quantity: 1
     };
 
-    // 5. Send it to Firestore
     try {
       const cartRef = doc(db, "carts", currentUserUID);
       const cartSnap = await getDoc(cartRef);
-
       if (cartSnap.exists()) {
         await updateDoc(cartRef, { items: arrayUnion(productData) });
       } else {
         await setDoc(cartRef, { items: [productData] });
       }
-      alert(productData.name + " was successfully added to your cart!");
+      showToast(productData.name + " was successfully added to your cart!", "success");
     } catch (error) {
-      console.error("Firestore Error: ", error);
-      alert("Failed to add to cart. Check your browser console.");
+      showToast("Failed to add to cart.", "error");
     }
   }
 });
 
-
-// === PHASE 9 & 10: DYNAMIC CART, MATH & RAZORPAY CHECKOUT ===
+// 9. DYNAMIC CART & QR CODE
 const cartContainer = document.getElementById("cart-items-container");
-const checkoutBtn = document.querySelector(".checkout-btn"); 
-
-// This holds the cart data globally so the checkout button can access it
 let currentCartItems = []; 
 
 if (cartContainer) {
-  // 1. Fetch Cart from Database on Page Load
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
         const cartRef = doc(db, "carts", user.uid);
         const cartSnap = await getDoc(cartRef);
-        
         if (cartSnap.exists() && cartSnap.data().items.length > 0) {
           currentCartItems = cartSnap.data().items;
           renderCart(currentCartItems);
@@ -376,17 +183,13 @@ if (cartContainer) {
     }
   });
 
-  // 2. The Engine: Injects HTML and perfectly calculates the Bill
   function renderCart(itemsArray) {
     cartContainer.innerHTML = "";
     let subtotal = 0;
-
     itemsArray.forEach((item, index) => {
       const itemQuantity = item.quantity || 1;
       const itemTotal = item.price * itemQuantity;
       subtotal += itemTotal;
-
-      // Notice we are forcing the ₹ symbol on all items here
       cartContainer.innerHTML += `
         <div class="cart-item" data-index="${index}">
             <img src="${item.image}" alt="${item.name}" class="cart-item-img">
@@ -404,27 +207,24 @@ if (cartContainer) {
         </div>
       `;
     });
-
     const formattedSubtotal = "₹" + subtotal.toFixed(2);
     document.getElementById("cart-subtotal").innerText = formattedSubtotal;
     document.getElementById("cart-total").innerText = formattedSubtotal;
+    generateUPIQRCode(subtotal);
   }
 
-  // 3. Helper to clear the screen
   function showEmptyCart() {
     cartContainer.innerHTML = `<p class="empty-cart-msg">Your cart is empty.</p>`;
     document.getElementById("cart-subtotal").innerText = "₹0.00";
     document.getElementById("cart-total").innerText = "₹0.00";
     currentCartItems = [];
+    generateUPIQRCode(0);
   }
 
-  // 4. Handle Fast +, -, and x clicks
   cartContainer.addEventListener("click", async (event) => {
     if (!currentUserUID) return;
-
     const cartItemEl = event.target.closest(".cart-item");
     if (!cartItemEl) return; 
-
     const index = parseInt(cartItemEl.getAttribute("data-index"));
     const cartRef = doc(db, "carts", currentUserUID);
     let needsUpdate = false;
@@ -445,80 +245,261 @@ if (cartContainer) {
     if (needsUpdate) {
       if (currentCartItems.length === 0) showEmptyCart();
       else renderCart(currentCartItems);
-      
       await updateDoc(cartRef, { items: currentCartItems });
     }
   });
-}// 5. Razorpay Checkout Connection (with a self-healing button)
-if (checkoutBtn) {
-  checkoutBtn.addEventListener("click", async () => {
-    if (!currentUserUID || currentCartItems.length === 0) {
-      alert("Your cart is empty!");
-      return;
-    }
-
-    checkoutBtn.disabled = true;
-    checkoutBtn.innerText = "Processing...";
-
-    try {
-      const response = await fetch("http://localhost:3000/create-razorpay-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: currentCartItems })
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to create order.");
-      }
-
-      const options = {
-        "key": "rzp_test_TZDUKoDeiDIslM",
-        "amount": data.amount,
-        "currency": "INR",
-        "name": "Tulsi Traders",
-        "description": "Organic Produce",
-        "order_id": data.orderId,
-        "prefill": {
-          "email": auth.currentUser ? auth.currentUser.email : "",
-          "contact": "9999999999"
-        },
-        "handler": async function (response) {
-          alert("Payment Successful! ID: " + response.razorpay_payment_id);
-          const cartRef = doc(db, "carts", currentUserUID);
-          await updateDoc(cartRef, { items: [] });
-          window.location.reload();
-        },
-        "modal": {
-          // Fires if the user closes the popup without paying —
-          // WITHOUT this, the button stays stuck on "Processing..." forever
-          "ondismiss": function () {
-            checkoutBtn.disabled = false;
-            checkoutBtn.innerText = "Proceed to Checkout";
-          }
-        },
-        "theme": { "color": "#0B5C46" }
-      };
-
-      const rzp = new window.Razorpay(options);
-
-      // Fires on a declined/failed payment — resets the button instead of hanging
-      rzp.on("payment.failed", function (response) {
-        alert("Payment failed: " + response.error.description);
-        checkoutBtn.disabled = false;
-        checkoutBtn.innerText = "Proceed to Checkout";
-      });
-
-      rzp.open();
-      checkoutBtn.disabled = false;
-      checkoutBtn.innerText = "Proceed to Checkout";
-
-    } catch (error) {
-      console.error("Checkout Error:", error);
-      alert("Cannot connect to Node.js backend. Is your server.js running?");
-      checkoutBtn.disabled = false;
-      checkoutBtn.innerText = "Proceed to Checkout";
-    }
-  });
 }
+
+function generateUPIQRCode(finalTotal) {
+    const myUPI_ID = "9325586418@fam"; 
+    const storeName = "Tulsi Traders";
+    const upiLinkTag = document.getElementById('upi-link');
+    const qrImage = document.getElementById('upi-qr-code');
+    const qrInstruction = document.getElementById('qr-instruction');
+    const qrEmptyMsg = document.getElementById('qr-empty-msg');
+
+    if (upiLinkTag && qrImage && qrInstruction && qrEmptyMsg) {
+        if (finalTotal > 0) {
+            const upiString = `upi://pay?pa=${myUPI_ID}&pn=${encodeURIComponent(storeName)}&am=${finalTotal}&cu=INR`;
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
+            qrImage.src = qrApiUrl;
+            upiLinkTag.href = upiString; 
+            qrInstruction.innerText = `Pay exactly ₹${finalTotal.toFixed(2)}`;
+            upiLinkTag.style.display = "block";
+            qrEmptyMsg.style.display = "none";
+        } else {
+            upiLinkTag.style.display = "none";
+            qrEmptyMsg.style.display = "block";
+        }
+    }
+}// 10. COMMUNITY COMMENTS LOGIC (SECURE LIKES, AUTO-NAME & HOME PAGE TOP 3)
+document.addEventListener("DOMContentLoaded", () => {
+    const commentForm = document.getElementById('comment-form');
+    const commentsFeed = document.getElementById('comments-feed');
+    const topCommentsContainer = document.getElementById('top-3-comments'); 
+
+    const renderStars = (rating) => {
+        let starsHtml = '<div class="stars" style="color: #d9c98a; margin-bottom: 10px;">';
+        for (let i = 1; i <= 5; i++) {
+            starsHtml += i <= rating ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+        }
+        starsHtml += '</div>';
+        return starsHtml;
+    };
+
+    // --- 1. COMMUNITY PAGE: LOAD ALL COMMENTS ---
+    if (commentForm && commentsFeed) {
+        const loadComments = async () => {
+            commentsFeed.innerHTML = 'Loading community voices...';
+            const q = query(collection(db, "community_comments"), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
+            
+            commentsFeed.innerHTML = '';
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const rating = data.rating || 5; 
+                const likedBy = data.likedBy || [];
+                // We pull the number for the UI
+                const likesCount = data.likesCount || 0; 
+                
+                const hasLiked = currentUserUID ? likedBy.includes(currentUserUID) : false;
+                
+                commentsFeed.innerHTML += `
+                    <div class="testimonial-card" style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        ${renderStars(rating)}
+                        <p style="font-style: italic; color: #5c6a60; margin-bottom: 15px;">"${data.text}"</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <strong style="color: #0B5C46;">@${data.name}</strong>
+                            <button class="like-btn ${hasLiked ? 'liked' : ''}" data-id="${docSnap.id}">
+                                <i class="${hasLiked ? 'fa-solid' : 'fa-regular'} fa-heart" style="color: ${hasLiked ? '#e63946' : ''}"></i> 
+                                <span class="like-count">${likesCount}</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        };
+
+        commentForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!auth.currentUser) {
+                if(window.showToast) showToast("Please log in to post a comment!", "error");
+                return;
+            }
+
+            const btn = this.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Posting... <i class="fa-solid fa-spinner fa-spin"></i>';
+            
+            let autoName = "User";
+            if (auth.currentUser.displayName) {
+                autoName = auth.currentUser.displayName.split(' ')[0]; 
+            } else if (auth.currentUser.email) {
+                autoName = auth.currentUser.email.split('@')[0]; 
+            }
+            
+            const text = document.getElementById('comment-text').value;
+            const ratingElement = document.querySelector('input[name="rating"]:checked');
+            const rating = ratingElement ? parseInt(ratingElement.value) : 5;
+
+            try {
+                await addDoc(collection(db, "community_comments"), {
+                    name: autoName,
+                    text: text,
+                    rating: rating,
+                    likedBy: [], 
+                    likesCount: 0, // NEW: We must save a number so the Home Page can sort by it!
+                    timestamp: serverTimestamp()
+                });
+                this.reset();
+                document.getElementById('star5').checked = true;
+                if(window.showToast) showToast("Review posted successfully!");
+                btn.innerHTML = 'Posted! <i class="fa-solid fa-check"></i>';
+                setTimeout(() => btn.innerHTML = originalText, 2000);
+                loadComments(); 
+            } catch (error) {
+                if(window.showToast) showToast("Error posting review.", "error");
+            }
+        });
+        
+        setTimeout(loadComments, 800);
+    }
+
+    // --- 2. HOME PAGE: LOAD TOP 3 LIKED COMMENTS ---
+    if (topCommentsContainer) {
+        const loadTopComments = async () => {
+            try {
+                // Firebase sorts by our new 'likesCount' number field
+                const q = query(collection(db, "community_comments"), orderBy("likesCount", "desc"), limit(3));
+                const querySnapshot = await getDocs(q);
+                
+                topCommentsContainer.innerHTML = '';
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const rating = data.rating || 5;
+                    
+                    topCommentsContainer.innerHTML += `
+                        <div class="testimonial-card" style="background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                            ${renderStars(rating)}
+                            <p style="color: #5c6a60; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">"${data.text}"</p>
+                            <div class="testimonial-author">
+                                <strong style="color: #0B5C46; display: block;">@${data.name}</strong>
+                                <span style="color: #e63946; font-size: 12px; font-weight: bold; margin-top: 5px; display: block;">
+                                    <i class="fa-solid fa-heart"></i> ${data.likesCount || 0} Likes
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error loading top comments:", error);
+            }
+        };
+        setTimeout(loadTopComments, 800);
+    }
+});
+
+// --- 3. GLOBAL SECURE LIKE BUTTON ---
+document.addEventListener("click", async (e) => {
+    const likeBtn = e.target.closest(".like-btn");
+    if (likeBtn) {
+        e.preventDefault();
+        
+        if (!currentUserUID) {
+            if(window.showToast) showToast("Please log in to like comments!", "error");
+            return;
+        }
+
+        const commentId = likeBtn.getAttribute("data-id");
+        const icon = likeBtn.querySelector("i");
+        const countSpan = likeBtn.querySelector(".like-count");
+        const commentRef = doc(db, "community_comments", commentId);
+        
+        const isCurrentlyLiked = likeBtn.classList.contains("liked");
+        let currentCount = parseInt(countSpan.innerText) || 0;
+
+        if (isCurrentlyLiked) {
+            // UN-LIKE LOGIC
+            likeBtn.classList.remove("liked");
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+            icon.style.color = "";
+            countSpan.innerText = currentCount - 1;
+            
+            // Updates both the Array and the Number field in Firebase simultaneously
+            await updateDoc(commentRef, { 
+                likedBy: arrayRemove(currentUserUID),
+                likesCount: increment(-1) 
+            });
+        } else {
+            // LIKE LOGIC
+            likeBtn.classList.add("liked");
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+            icon.style.color = "#e63946";
+            countSpan.innerText = currentCount + 1;
+            
+            await updateDoc(commentRef, { 
+                likedBy: arrayUnion(currentUserUID),
+                likesCount: increment(1) 
+            });
+        }
+    }
+});
+// --- GLOBAL LIKE BUTTON CLICK LISTENER ---
+document.addEventListener("click", async (e) => {
+    const likeBtn = e.target.closest(".like-btn");
+    if (likeBtn) {
+        e.preventDefault();
+        
+        // Prevent users from spam-clicking the like button
+        if (likeBtn.classList.contains("liked")) return;
+        likeBtn.classList.add("liked");
+
+        const commentId = likeBtn.getAttribute("data-id");
+        const icon = likeBtn.querySelector("i");
+        const countSpan = likeBtn.querySelector(".like-count");
+        
+        // Instant visual update (Optimistic UI)
+        icon.classList.remove("fa-regular");
+        icon.classList.add("fa-solid");
+        icon.style.color = "#e63946";
+        countSpan.innerText = parseInt(countSpan.innerText) + 1;
+
+        try {
+            // Update the database securely
+            const commentRef = doc(db, "community_comments", commentId);
+            await updateDoc(commentRef, { likes: increment(1) });
+        } catch (error) {
+            console.error("Failed to like:", error);
+        }
+    }
+});
+
+// === CUSTOM TOAST NOTIFICATION ENGINE ===
+window.showToast = function(message, type = "success") {
+    // 1. Create the container if it doesn't exist yet
+    let container = document.getElementById("toast-container");
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "toast-container";
+        document.body.appendChild(container);
+    }
+
+    // 2. Create the notification box
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    
+    // 3. Choose the right icon (Checkmark for success, Alert for error)
+    const icon = type === "success" ? '<i class="fa-solid fa-circle-check"></i>' : '<i class="fa-solid fa-circle-exclamation"></i>';
+    toast.innerHTML = `${icon} <span>${message}</span>`;
+
+    // 4. Put it on the screen
+    container.appendChild(toast);
+
+    // 5. Automatically delete it from the code after 4 seconds so it doesn't clutter the page
+    setTimeout(() => {
+        toast.remove();
+    }, 4000);
+};
