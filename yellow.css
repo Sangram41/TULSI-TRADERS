@@ -2240,3 +2240,30 @@ body, html {
     overflow-x: hidden; /* Absolutely prevents horizontal side-scrolling on mobile */
     width: 100%;
 }
+/* ===================================
+   PRODUCT CARD & BUTTON ALIGNMENT FIX
+=================================== */
+.shop-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Forces the card to stretch to match its neighbors */
+}
+
+.shop-card .smart-add-to-cart-btn {
+    margin-top: auto; /* Magically pushes the button to the very bottom */
+    width: 100%;
+    text-align: center;
+}
+
+/* ===================================
+   MOBILE MENU EMAIL DISPLAY FIX
+=================================== */
+/* Prevents long emails from breaking the mobile menu layout */
+#user-email-display {
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: bottom;
+}
