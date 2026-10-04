@@ -2037,6 +2037,20 @@ em { font-style: italic; font-weight: 400; }
 .like-btn:hover {
     color: #e63946;
     background-color: rgba(230, 57, 70, 0.1);
+    /* ===================================
+   DESKTOP IMAGE STRETCH FIX
+=================================== */
+.showcase img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+.showcase {
+    background-size: cover !important;
+    background-position: center !important;
+}
 }/* ===================================
    MOBILE — single consolidated block
 =================================== */
