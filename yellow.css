@@ -2457,6 +2457,18 @@ body, html {
     .right-pane { flex: none; width: 100%; min-height: 100vh; padding: 30px 20px; }
 
     /* Home page Overrides */
+    /* Fixes stretched hero images */
+.showcase img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+}
+
+/* Fixes stretched background images (if applicable) */
+.showcase {
+    background-size: cover !important;
+    background-position: center !important;
+}
     .showcase .grid { display: block; }
     .showcase-text { width: 100%; padding: 0 20px; text-align: center; margin-left: 0; }
     .showcase-text h2 { font-size: 32px; margin-bottom: 15px; }
